@@ -12,7 +12,7 @@ function Navbar() {
           
           
           <ul className='flex space-x-3'>
-            <li > <Link href={'/Search'}>Search Hotels</Link> </li>
+            <li > <Link className="hover:text-blue-300" href={'/Search'} >Search Hotels</Link> </li>
             <li > <Link href={'/'}>Offers and sale</Link> </li>
             <li > <Link href={'/'}>Party</Link> </li>
             </ul>

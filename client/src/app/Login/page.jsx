@@ -6,13 +6,35 @@ import { useState } from 'react';
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-  
-    const handleLogin = (e) => {
-      e.preventDefault();
-      // Add your login logic here
-      console.log('Username:', username);
-      console.log('Password:', password);
+    const validateEmail = (email) => {
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return regex.test(String(email).toLowerCase());
     };
+
+      const handleLogin = (e) => {
+        e.preventDefault();
+
+        if (!validateEmail(email)) {
+          setError('Please enter a valid email address');
+          return;
+        }
+        // Perform the fetch request here
+        fetch('http:localhost:8000/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Handle the response data here
+          })
+          .catch((error) => {
+            // Handle any errors here
+          });
+      };
+    
   return (
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
     <div class="p-6 space-y-4 md:space-y-6 sm:p-8">

@@ -9,17 +9,40 @@ function Signup() {
       const [zipcode, setZipcode] = useState('');
       const [gender, setGender] = useState('');
       const [password, setPassword] = useState('');
+      const [repassword, setRepassword] = useState('');
       const [birthdate, setBirthdate] = useState('');
     
       const handleSignup = (e) => {
         e.preventDefault();
-        // Add your signup logic here
-        console.log('Full Name:', fullName);
-        console.log('Email:', email);
-        console.log('Zip Code:', zipcode);
-        console.log('Gender:', gender);
-        console.log('Password:', password);
-        console.log('Birthdate:', birthdate);
+        if (password === repassword){
+          const signupdata = {
+            fullName:fullName,
+            email: email,
+            zipcode: zipcode,
+            gender: gender,
+            password: password,
+            birthdate: birthdate
+          }
+          console.log(signupdata);
+          fetch('http:localhost:8000/api/signup', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(signupdata),
+          })
+
+        }else{
+          alert("password do not match")
+          
+        }
+        
+
+
+        
+
+        
+        
       };
     
       return (
@@ -92,10 +115,10 @@ function Signup() {
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
+            id="repassword"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={repassword}
+            onChange={(e) => setRepassword(e.target.value)}
           />
         </div>
         <div className="mb-4">
