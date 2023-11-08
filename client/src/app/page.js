@@ -1,4 +1,4 @@
-import SearchBar from '@/components/SearchBar'
+
 import Image from 'next/image'
 import Display from '@/components/Locations'
 

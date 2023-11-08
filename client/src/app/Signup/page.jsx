@@ -46,10 +46,10 @@ function Signup() {
       };
     
       return (
-        <div className="flex justify-center items-center h-screen">
-      <form onSubmit={handleSignup} className="max-w-md w-full">
-        <h1 className="text-3xl font-bold mb-8 text-center">Signup Page</h1>
-        <div className="mb-4">
+        <div className=" signup flex h-screen">
+      <form onSubmit={handleSignup} className="max-w-md ml-20  w-full">
+        <h1 className="text-3xl font-bold mb-8 text-center ">Signup Page</h1>
+        <div className="mb-1">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="fullName">
             Full Name
           </label>
@@ -61,7 +61,7 @@ function Signup() {
             onChange={(e) => setFullName(e.target.value)}
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-1">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
             Email
           </label>
@@ -73,7 +73,7 @@ function Signup() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-1">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="zipcode">
             Zip Code
           </label>
@@ -85,7 +85,7 @@ function Signup() {
             onChange={(e) => setZipcode(e.target.value)}
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-1">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="gender">
             Gender
           </label>
@@ -97,7 +97,7 @@ function Signup() {
             onChange={(e) => setGender(e.target.value)}
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-1">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
             Password
           </label>
@@ -109,7 +109,7 @@ function Signup() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-2">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
             Repeat Password
           </label>
@@ -121,7 +121,7 @@ function Signup() {
             onChange={(e) => setRepassword(e.target.value)}
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-1">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="birthdate">
             Birthdate
           </label>
@@ -135,7 +135,7 @@ function Signup() {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+          className=" hover:bg-blue-700 text-white-600 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
         >
           Signup
         </button>

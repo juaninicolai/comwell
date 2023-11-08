@@ -36,8 +36,8 @@ function Login() {
       };
     
   return (
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+    <div className=" login flex flex-col items-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <div className='mt-20 ml-20'>
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Sign in to your account
         </h1>
