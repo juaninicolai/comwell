@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from './schemas/user.schema';
@@ -27,6 +27,19 @@ export class AuthService {
   }
 
   async logIn(loginDto: LoginDto): Promise<{ token: string; }> {
-    throw new Error('Method not implemented.');
+    const { email, password } = loginDto;
+
+    const user = await this.userModel.findOne({ email }, { password: 1 })
+    const isPasswordCorrect = await bcrypt.compare(password, user.password)
+    if (!isPasswordCorrect) {
+      throw new HttpException({
+        status: HttpStatus.FORBIDDEN,
+        error: 'incorrect password',
+      }, HttpStatus.FORBIDDEN)
+    }
+
+    const token = this.jwtService.sign({ id: user._id });
+
+    return { token };
   }
 }
