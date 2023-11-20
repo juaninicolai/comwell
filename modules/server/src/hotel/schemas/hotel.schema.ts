@@ -11,16 +11,16 @@ export enum Category {
 })
 export class Hotel {
   @Prop()
-  name: String;
+  name: string;
 
   @Prop()
-  description: String;
+  description: string;
 
   @Prop()
-  rooms: Number;
+  rooms: number;
 
   @Prop()
-  price: Number;
+  price: number;
 
   @Prop()
   category: Category;
