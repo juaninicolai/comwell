@@ -5,11 +5,10 @@ import { HotelService } from './hotel.service';
 import { HotelSchema } from './schemas/hotel.schema';
 
 @Module({
- 
- 
-imports : [MongooseModule.forFeature([{ name: 'Hotel', schema: HotelSchema }])],
-controllers : [HotelController],
-providers: [HotelService],
-
+  imports: [
+    MongooseModule.forFeature([{ name: 'Hotel', schema: HotelSchema }]),
+  ],
+  controllers: [HotelController],
+  providers: [HotelService],
 })
 export class HotelModule {}
