@@ -14,21 +14,21 @@ import { UpdateBookingDto } from './dto/update-booking.dto';
 
 @Controller('hotel')
 export class HotelController {
-  hotelModel: any;
-
-  constructor(private hotelService: HotelService) {}
+  constructor(private hotelService: HotelService) { }
 
   @Get()
   async getAllHotels(): Promise<Hotel[]> {
     return this.hotelService.findAll();
   }
-  @Post('/api/bookings')
+
+  @Post()
   async createHotel(
     @Body()
     hotel: CreateBookingDto,
   ): Promise<Hotel> {
     return this.hotelService.create(hotel);
   }
+
   @Get(':id')
   async getHotel(
     @Param('id')
@@ -36,6 +36,7 @@ export class HotelController {
   ): Promise<Hotel> {
     return this.hotelService.findById(id);
   }
+
   @Put(':id')
   async updateHotel(
     @Param('id')
