@@ -6,11 +6,8 @@ import { useState } from "react";
 function Signup() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [zipcode, setZipcode] = useState("");
-  const [gender, setGender] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
-  const [birthdate, setBirthdate] = useState("");
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -18,10 +15,7 @@ function Signup() {
       const signupdata = {
         fullName: fullName,
         email: email,
-        zipcode: zipcode,
-        gender: gender,
         password: password,
-        birthdate: birthdate,
       };
       console.log(signupdata);
       fetch("http:localhost:8000/api/signup", {
@@ -73,36 +67,6 @@ function Signup() {
         <div className="mb-1">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="zipcode"
-          >
-            Zip Code
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="zipcode"
-            type="text"
-            value={zipcode}
-            onChange={(e) => setZipcode(e.target.value)}
-          />
-        </div>
-        <div className="mb-1">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="gender"
-          >
-            Gender
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="gender"
-            type="text"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-          />
-        </div>
-        <div className="mb-1">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="password"
           >
             Password
@@ -128,21 +92,6 @@ function Signup() {
             type="password"
             value={repassword}
             onChange={(e) => setRepassword(e.target.value)}
-          />
-        </div>
-        <div className="mb-1">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="birthdate"
-          >
-            Birthdate
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="birthdate"
-            type="date"
-            value={birthdate}
-            onChange={(e) => setBirthdate(e.target.value)}
           />
         </div>
         <button
