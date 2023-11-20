@@ -6,12 +6,13 @@ import { useState } from "react";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   const validateEmail = (email) => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(String(email).toLowerCase());
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!validateEmail(email)) {
@@ -19,20 +20,30 @@ function Login() {
       return;
     }
     // Perform the fetch request here
-    fetch("http:localhost:8000/api/login", {
+    const response = await fetch("http://localhost:3001/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle the response data here
-      })
-      .catch((error) => {
-        // Handle any errors here
-      });
+
+    if (!response.ok) {
+      alert("Login failed")
+      throw new Error("response is not ok")
+    }
+
+    let body
+    try {
+      body = await response.json()
+    } catch {
+      alert("Login failed")
+      throw new Error("can't decode json")
+    }
+
+    const { token } = body
+    sessionStorage.setItem("token", token)
+    location.href = '/'
   };
 
   return (

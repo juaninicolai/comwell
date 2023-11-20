@@ -4,16 +4,15 @@ import { Model } from 'mongoose';
 import { User } from './schemas/user.schema';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
-import { SignUpDto } from './dto/signup.dto';
+import { LoginDto, SignUpDto } from './dto/signup.dto';
 
 @Injectable()
 export class AuthService {
-  userService: any;
   constructor(
     @InjectModel(User.name)
     private userModel: Model<User>,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
     const { name, email, password } = signUpDto;
@@ -25,5 +24,9 @@ export class AuthService {
     });
     const token = this.jwtService.sign({ id: user._id });
     return { token };
+  }
+
+  async logIn(loginDto: LoginDto): Promise<{ token: string; }> {
+    throw new Error('Method not implemented.');
   }
 }

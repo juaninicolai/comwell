@@ -26,7 +26,7 @@ function Signup() {
         body: JSON.stringify(signupdata),
       });
 
-      if (response.status !== 201) {
+      if (!response.ok) {
         alert("Sign up failed")
         throw new Error("response is not ok")
       }
