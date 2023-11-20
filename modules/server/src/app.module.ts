@@ -8,8 +8,8 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://127.0.0.1:27017/hotel-booking'),
-    HotelModule,
     AuthModule,
+    HotelModule,
   ],
   controllers: [AppController],
   providers: [AppService],
