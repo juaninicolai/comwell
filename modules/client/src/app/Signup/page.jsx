@@ -1,56 +1,50 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { useState } from 'react';
+import React from "react";
+import { useState } from "react";
 
 function Signup() {
-      const [fullName, setFullName] = useState('');
-      const [email, setEmail] = useState('');
-      const [zipcode, setZipcode] = useState('');
-      const [gender, setGender] = useState('');
-      const [password, setPassword] = useState('');
-      const [repassword, setRepassword] = useState('');
-      const [birthdate, setBirthdate] = useState('');
-    
-      const handleSignup = (e) => {
-        e.preventDefault();
-        if (password === repassword){
-          const signupdata = {
-            fullName:fullName,
-            email: email,
-            zipcode: zipcode,
-            gender: gender,
-            password: password,
-            birthdate: birthdate
-          }
-          console.log(signupdata);
-          fetch('http:localhost:8000/api/signup', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(signupdata),
-          })
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [gender, setGender] = useState("");
+  const [password, setPassword] = useState("");
+  const [repassword, setRepassword] = useState("");
+  const [birthdate, setBirthdate] = useState("");
 
-        }else{
-          alert("password do not match")
-          
-        }
-        
-
-
-        
-
-        
-        
+  const handleSignup = (e) => {
+    e.preventDefault();
+    if (password === repassword) {
+      const signupdata = {
+        fullName: fullName,
+        email: email,
+        zipcode: zipcode,
+        gender: gender,
+        password: password,
+        birthdate: birthdate,
       };
-    
-      return (
-        <div className=" signup flex h-screen">
+      console.log(signupdata);
+      fetch("http:localhost:8000/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(signupdata),
+      });
+    } else {
+      alert("password do not match");
+    }
+  };
+
+  return (
+    <div className=" signup flex h-screen">
       <form onSubmit={handleSignup} className="max-w-md ml-20  w-full">
         <h1 className="text-3xl font-bold mb-8 text-center ">Signup Page</h1>
         <div className="mb-1">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="fullName">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="fullName"
+          >
             Full Name
           </label>
           <input
@@ -62,7 +56,10 @@ function Signup() {
           />
         </div>
         <div className="mb-1">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="email"
+          >
             Email
           </label>
           <input
@@ -74,7 +71,10 @@ function Signup() {
           />
         </div>
         <div className="mb-1">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="zipcode">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="zipcode"
+          >
             Zip Code
           </label>
           <input
@@ -86,7 +86,10 @@ function Signup() {
           />
         </div>
         <div className="mb-1">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="gender">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="gender"
+          >
             Gender
           </label>
           <input
@@ -98,7 +101,10 @@ function Signup() {
           />
         </div>
         <div className="mb-1">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="password"
+          >
             Password
           </label>
           <input
@@ -110,7 +116,10 @@ function Signup() {
           />
         </div>
         <div className="mb-2">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="password"
+          >
             Repeat Password
           </label>
           <input
@@ -122,7 +131,10 @@ function Signup() {
           />
         </div>
         <div className="mb-1">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="birthdate">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="birthdate"
+          >
             Birthdate
           </label>
           <input
@@ -142,12 +154,6 @@ function Signup() {
       </form>
     </div>
   );
-};
+}
 
 export default Signup;
-
-
-
-
-
-

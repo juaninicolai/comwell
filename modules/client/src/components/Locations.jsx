@@ -1,15 +1,14 @@
-'use client'
-import React, { useState, useEffect } from 'react';
+"use client";
+import React, { useState, useEffect } from "react";
 
 function Locations() {
-
   const [hotels, setHotels] = useState([]);
-    
+
   useEffect(() => {
-    fetch('http://localhost:8000/hotels')
+    fetch("http://localhost:8000/hotels")
       .then((response) => response.json())
       .then((data) => setHotels(data))
-      .catch((error) => console.error('Error fetching data:', error));
+      .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
   return (
@@ -26,6 +25,6 @@ function Locations() {
       ))}
     </div>
   );
-};
+}
 
 export default Locations;

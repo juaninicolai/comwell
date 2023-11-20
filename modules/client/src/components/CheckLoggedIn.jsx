@@ -1,10 +1,13 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
+import React from "react";
+import { Redirect } from "react-router-dom";
 
 const checkLoggedIn = () => {
   // Check if the JWT token is stored in the cookies
-  const jwtToken = document.cookie.replace(/(?:(?:^|.*;\s*)jwtToken\s*=\s*([^;]*).*$)|^.*$/, "$1");
-  
+  const jwtToken = document.cookie.replace(
+    /(?:(?:^|.*;\s*)jwtToken\s*=\s*([^;]*).*$)|^.*$/,
+    "$1",
+  );
+
   // Check if the user is logged in
   const isLoggedIn = !!jwtToken; // You can modify this check based on your authentication logic
 
@@ -16,6 +19,5 @@ const checkLoggedIn = () => {
   // If the user is not logged in or the JWT token is not present, redirect the user to the login page
   return false;
 };
-
 
 export default checkLoggedIn;
