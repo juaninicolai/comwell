@@ -9,22 +9,39 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     if (password === repassword) {
       const signupdata = {
-        fullName: fullName,
+        name: fullName,
         email: email,
         password: password,
       };
-      console.log(signupdata);
-      fetch("http:localhost:8000/api/signup", {
+
+      const response = await fetch("http://localhost:3001/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(signupdata),
       });
+
+      if (response.status !== 201) {
+        alert("Sign up failed")
+        throw new Error("response is not ok")
+      }
+
+      let body
+      try {
+        body = await response.json()
+      } catch {
+        alert("Sign up failed")
+        throw new Error("can't decode json")
+      }
+
+      const { token } = body
+      sessionStorage.setItem("token", token)
+      location.href = '/'
     } else {
       alert("password do not match");
     }
