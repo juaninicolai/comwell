@@ -27,21 +27,21 @@ function Signup() {
       });
 
       if (!response.ok) {
-        alert("Sign up failed")
-        throw new Error("response is not ok")
+        alert("Sign up failed");
+        throw new Error("response is not ok");
       }
 
-      let body
+      let body;
       try {
-        body = await response.json()
+        body = await response.json();
       } catch {
-        alert("Sign up failed")
-        throw new Error("can't decode json")
+        alert("Sign up failed");
+        throw new Error("can't decode json");
       }
 
-      const { token } = body
-      sessionStorage.setItem("token", token)
-      location.href = '/'
+      const { token } = body;
+      sessionStorage.setItem("token", token);
+      location.href = "/";
     } else {
       alert("password do not match");
     }

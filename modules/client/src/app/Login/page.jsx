@@ -26,24 +26,24 @@ function Login() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
-    })
+    });
 
     if (!response.ok) {
-      alert("Login failed")
-      throw new Error("response is not ok")
+      alert("Login failed");
+      throw new Error("response is not ok");
     }
 
-    let body
+    let body;
     try {
-      body = await response.json()
+      body = await response.json();
     } catch {
-      alert("Login failed")
-      throw new Error("can't decode json")
+      alert("Login failed");
+      throw new Error("can't decode json");
     }
 
-    const { token } = body
-    sessionStorage.setItem("token", token)
-    location.href = '/'
+    const { token } = body;
+    sessionStorage.setItem("token", token);
+    location.href = "/";
   };
 
   return (

@@ -12,7 +12,7 @@ export class AuthService {
     @InjectModel(User.name)
     private userModel: Model<User>,
     private jwtService: JwtService,
-  ) { }
+  ) {}
 
   async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
     const { name, email, password } = signUpDto;
@@ -26,16 +26,19 @@ export class AuthService {
     return { token };
   }
 
-  async logIn(loginDto: LoginDto): Promise<{ token: string; }> {
+  async logIn(loginDto: LoginDto): Promise<{ token: string }> {
     const { email, password } = loginDto;
 
-    const user = await this.userModel.findOne({ email }, { password: 1 })
-    const isPasswordCorrect = await bcrypt.compare(password, user.password)
+    const user = await this.userModel.findOne({ email }, { password: 1 });
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
-      throw new HttpException({
-        status: HttpStatus.FORBIDDEN,
-        error: 'incorrect password',
-      }, HttpStatus.FORBIDDEN)
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'incorrect password',
+        },
+        HttpStatus.FORBIDDEN,
+      );
     }
 
     const token = this.jwtService.sign({ id: user._id });

@@ -14,7 +14,7 @@ import { UpdateBookingDto } from './dto/update-booking.dto';
 
 @Controller('hotel')
 export class HotelController {
-  constructor(private hotelService: HotelService) { }
+  constructor(private hotelService: HotelService) {}
 
   @Get()
   async getAllHotels(): Promise<Hotel[]> {
