@@ -21,20 +21,20 @@ export class HotelController {
     return this.hotelService.findAll();
   }
 
-  @Post()
-  async createHotel(
-    @Body()
-    hotel: CreateBookingDto,
-  ): Promise<Hotel> {
-    return this.hotelService.create(hotel);
-  }
-
   @Get(':id')
   async getHotel(
     @Param('id')
     id: string,
   ): Promise<Hotel> {
     return this.hotelService.findById(id);
+  }
+
+  @Post()
+  async createHotel(
+    @Body()
+    hotel: CreateBookingDto,
+  ): Promise<Hotel> {
+    return this.hotelService.create(hotel);
   }
 
   @Put(':id')
