@@ -40,7 +40,7 @@ function Signup() {
       }
 
       const { token } = body;
-      sessionStorage.setItem("token", token);
+      document.cookie = "jwt=" + token
       location.href = "/";
     } else {
       alert("password do not match");
