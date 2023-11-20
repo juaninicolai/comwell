@@ -6,15 +6,18 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { HotelService } from './hotel.service';
 import { Hotel } from './schemas/hotel.schema';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('hotel')
+@UseGuards(AuthGuard())
 export class HotelController {
-  constructor(private hotelService: HotelService) {}
+  constructor(private hotelService: HotelService) { }
 
   @Get()
   async getAllHotels(): Promise<Hotel[]> {
