@@ -9,20 +9,20 @@ export enum Category {
 @Schema({
   timestamps: true,
 })
-export class Hotel {
+export class Booking {
   @Prop()
   name: string;
-
-  @Prop()
-  description: string;
-
-  @Prop()
-  rooms: number;
 
   @Prop()
   price: number;
 
   @Prop()
   category: Category;
+
+  @Prop()
+  from: Date;
+
+  @Prop()
+  to: Date;
 }
-export const HotelSchema = SchemaFactory.createForClass(Hotel);
+export const BookingSchema = SchemaFactory.createForClass(Booking);

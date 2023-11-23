@@ -1,26 +1,23 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   Post,
-  Put,
   UseGuards,
 } from '@nestjs/common';
-import { HotelService } from './hotel.service';
-import { Hotel } from './schemas/hotel.schema';
+import { BookingService } from './hotel.service';
+import { Booking } from './schemas/hotel.schema';
 import { CreateBookingDto } from './dto/create-booking.dto';
-import { UpdateBookingDto } from './dto/update-booking.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('hotel')
 @UseGuards(AuthGuard())
-export class HotelController {
-  constructor(private hotelService: HotelService) { }
+export class BookingController {
+  constructor(private hotelService: BookingService) { }
 
   @Get()
-  async getAllHotels(): Promise<Hotel[]> {
+  async getAllHotels(): Promise<Booking[]> {
     return this.hotelService.findAll();
   }
 
@@ -28,33 +25,21 @@ export class HotelController {
   async getHotel(
     @Param('id')
     id: string,
-  ): Promise<Hotel> {
+  ): Promise<Booking> {
     return this.hotelService.findById(id);
   }
 
-  @Post()
-  async createHotel(
+  @Post("booking")
+  async createBooking(
     @Body()
-    hotel: CreateBookingDto,
-  ): Promise<Hotel> {
-    return this.hotelService.create(hotel);
-  }
-
-  @Put(':id')
-  async updateHotel(
-    @Param('id')
-    id: string,
-    @Body()
-    hotel: UpdateBookingDto,
-  ): Promise<Hotel> {
-    return this.hotelService.updateById(id, hotel);
-  }
-
-  @Delete(':id')
-  async deleteHotel(
-    @Param('id')
-    id: string,
-  ): Promise<Hotel> {
-    return this.hotelService.deleteById(id);
+    creatingBookingDto: CreateBookingDto,
+  ): Promise<Booking> {
+    const booking: Booking = new Booking()
+    booking.name = creatingBookingDto.name
+    booking.price = creatingBookingDto.price
+    booking.category = creatingBookingDto.category
+    booking.from = creatingBookingDto.from
+    booking.to = creatingBookingDto.to
+    return this.hotelService.create(creatingBookingDto);
   }
 }

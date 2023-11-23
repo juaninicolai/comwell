@@ -1,17 +1,16 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { HotelController } from './hotel.controller';
-import { HotelService } from './hotel.service';
-import { HotelSchema } from './schemas/hotel.schema';
-import { PassportModule } from '@nestjs/passport';
+import { BookingController } from './hotel.controller';
+import { BookingService } from './hotel.service';
+import { BookingSchema } from './schemas/hotel.schema';
 import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Hotel', schema: HotelSchema }]),
+    MongooseModule.forFeature([{ name: 'Booking', schema: BookingSchema }]),
     AuthModule,
   ],
-  controllers: [HotelController],
-  providers: [HotelService],
+  controllers: [BookingController],
+  providers: [BookingService],
 })
-export class HotelModule { }
+export class BookingModule { }

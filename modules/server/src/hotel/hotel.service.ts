@@ -1,36 +1,38 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Hotel } from './schemas/hotel.schema';
+import { Booking } from './schemas/hotel.schema';
+import { BookingSchema } from './schemas/hotel.schema';
 import * as mongoose from 'mongoose';
 
 @Injectable()
-export class HotelService {
+export class BookingService {
   constructor(
-    @InjectModel(Hotel.name)
-    private hotelModel: mongoose.Model<Hotel>,
-  ) {}
-  async findAll(): Promise<Hotel[]> {
-    const hotels = await this.hotelModel.find();
+    @InjectModel(Booking.name)
+    private bookingModel: mongoose.Model<Booking>,
+  ) { }
+
+  async findAll(): Promise<Booking[]> {
+    const hotels = await this.bookingModel.find();
     return hotels;
   }
-  async create(hotel: Hotel): Promise<Hotel> {
-    const res = await this.hotelModel.create(hotel);
+  async create(booking: Booking): Promise<Booking> {
+    const res = await this.bookingModel.create(booking);
     return res;
   }
-  async findById(id: string): Promise<Hotel> {
-    const hotel = await this.hotelModel.findById(id);
+  async findById(id: string): Promise<Booking> {
+    const hotel = await this.bookingModel.findById(id);
     if (!hotel) {
       throw new NotFoundException('Booking is not found ');
     }
     return hotel;
   }
-  async updateById(id: string, hotel: Hotel): Promise<Hotel> {
-    return await this.hotelModel.findByIdAndUpdate(id, hotel, {
+  async updateById(id: string, hotel: Booking): Promise<Booking> {
+    return await this.bookingModel.findByIdAndUpdate(id, hotel, {
       new: true,
       runValidator: true,
     });
   }
-  async deleteById(id: string): Promise<Hotel> {
-    return await this.hotelModel.findByIdAndDelete(id);
+  async deleteById(id: string): Promise<Booking> {
+    return await this.bookingModel.findByIdAndDelete(id);
   }
 }
