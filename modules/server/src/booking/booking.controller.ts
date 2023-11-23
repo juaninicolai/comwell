@@ -10,6 +10,7 @@ import { BookingService } from './booking.service';
 import { Booking } from './schemas/booking.schema';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { IsBookingAvailableDto } from './dto/is-booking-available.dto';
 
 @Controller('hotel')
 @UseGuards(AuthGuard())
@@ -41,5 +42,13 @@ export class BookingController {
     booking.from = creatingBookingDto.from
     booking.to = creatingBookingDto.to
     return this.bookingService.create(creatingBookingDto);
+  }
+
+  @Post("booking/is-available")
+  async isBookingAvailable(
+    @Body()
+    isBookingAvailableDto: IsBookingAvailableDto,
+  ): Promise<boolean> {
+    return Math.random() > 0.5
   }
 }

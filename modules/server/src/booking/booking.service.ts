@@ -35,4 +35,16 @@ export class BookingService {
   async deleteById(id: string): Promise<Booking> {
     return await this.bookingModel.findByIdAndDelete(id);
   }
+
+  async isBookingAvailable(name: string, from: Date, to: Date): Promise<boolean> {
+    const booking = this.bookingModel.findOne({
+      name,
+      $or: [
+        { $and: [{ from: { $gte: from } }, { from: { $lt: to } }] },
+        { $and: [{ to: { $gt: from } }, { to: { $lte: to } }] },
+        { $and: [{ from: { $lte: from } }, { to: { $gte: to } }] },
+      ],
+    })
+    return !booking
+  }
 }
