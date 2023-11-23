@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Booking } from './schemas/hotel.schema';
-import { BookingSchema } from './schemas/hotel.schema';
+import { Booking } from './schemas/booking.schema';
+import { BookingSchema } from './schemas/booking.schema';
 import * as mongoose from 'mongoose';
 
 @Injectable()

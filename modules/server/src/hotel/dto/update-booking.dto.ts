@@ -1,4 +1,4 @@
-import { Category } from '../schemas/hotel.schema';
+import { Category } from '../schemas/booking.schema';
 
 export class UpdateBookingDto {
   readonly name: string;

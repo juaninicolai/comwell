@@ -6,8 +6,8 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { BookingService } from './hotel.service';
-import { Booking } from './schemas/hotel.schema';
+import { BookingService } from './booking.service';
+import { Booking } from './schemas/booking.schema';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { AuthGuard } from '@nestjs/passport';
 
