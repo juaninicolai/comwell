@@ -15,4 +15,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: 'comwell',
     });
   }
+
+  async validate(token: any): Promise<string> {
+    return token.id
+  }
 }
