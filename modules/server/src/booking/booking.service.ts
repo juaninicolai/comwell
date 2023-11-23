@@ -12,22 +12,22 @@ export class BookingService {
   ) { }
 
   async findAll(): Promise<Booking[]> {
-    const hotels = await this.bookingModel.find();
-    return hotels;
+    const bookings = await this.bookingModel.find();
+    return bookings;
   }
   async create(booking: Booking): Promise<Booking> {
     const res = await this.bookingModel.create(booking);
     return res;
   }
   async findById(id: string): Promise<Booking> {
-    const hotel = await this.bookingModel.findById(id);
-    if (!hotel) {
+    const booking = await this.bookingModel.findById(id);
+    if (!booking) {
       throw new NotFoundException('Booking is not found ');
     }
-    return hotel;
+    return booking;
   }
-  async updateById(id: string, hotel: Booking): Promise<Booking> {
-    return await this.bookingModel.findByIdAndUpdate(id, hotel, {
+  async updateById(id: string, booking: Booking): Promise<Booking> {
+    return await this.bookingModel.findByIdAndUpdate(id, booking, {
       new: true,
       runValidator: true,
     });

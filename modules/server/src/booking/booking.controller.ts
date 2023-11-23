@@ -14,19 +14,19 @@ import { AuthGuard } from '@nestjs/passport';
 @Controller('hotel')
 @UseGuards(AuthGuard())
 export class BookingController {
-  constructor(private hotelService: BookingService) { }
+  constructor(private bookingService: BookingService) { }
 
   @Get()
-  async getAllHotels(): Promise<Booking[]> {
-    return this.hotelService.findAll();
+  async getAllBookings(): Promise<Booking[]> {
+    return this.bookingService.findAll();
   }
 
   @Get(':id')
-  async getHotel(
+  async getBooking(
     @Param('id')
     id: string,
   ): Promise<Booking> {
-    return this.hotelService.findById(id);
+    return this.bookingService.findById(id);
   }
 
   @Post("booking")
@@ -40,6 +40,6 @@ export class BookingController {
     booking.category = creatingBookingDto.category
     booking.from = creatingBookingDto.from
     booking.to = creatingBookingDto.to
-    return this.hotelService.create(creatingBookingDto);
+    return this.bookingService.create(creatingBookingDto);
   }
 }
