@@ -23,6 +23,7 @@ export class AuthService {
       plainTextPassword,
       user.hashedPassword,
     );
+    // TODO: Generate JWT token and return it directly.
     if (isPasswordCorrect) {
       return true;
     }
