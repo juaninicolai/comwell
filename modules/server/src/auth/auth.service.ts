@@ -1,4 +1,4 @@
-import {Injectable, UnauthorizedException} from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import { SignUpDto } from './dto/sign-up.dto';
 import { UsersService } from 'src/users/users.service';
 import bcrypt from 'bcryptjs';
@@ -27,7 +27,7 @@ export class AuthService {
     );
 
     if (!isPasswordCorrect) {
-      throw new UnauthorizedException();
+      return null;
     }
 
     return user;
