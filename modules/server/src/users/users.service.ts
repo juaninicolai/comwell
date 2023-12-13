@@ -32,7 +32,7 @@ export class UsersService {
     return this.userModel.findOne({ email });
   }
 
-  findById(id: number) {
+  findById(id: string) {
     return this.userModel.findById(id);
   }
 }
