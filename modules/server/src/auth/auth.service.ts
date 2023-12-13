@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable, UnauthorizedException} from '@nestjs/common';
 import { SignUpDto } from './dto/sign-up.dto';
 import { UsersService } from 'src/users/users.service';
 import bcrypt from 'bcryptjs';
@@ -6,7 +6,9 @@ import { LogInDto } from './dto/log-in.dto';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService) {}
+  constructor(
+      private usersService: UsersService
+  ) {}
 
   async signUp(signUpDto: SignUpDto) {
     const { email, password: plainTextPassword } = signUpDto;
@@ -23,10 +25,11 @@ export class AuthService {
       plainTextPassword,
       user.hashedPassword,
     );
-    // TODO: Generate JWT token and return it directly.
-    if (isPasswordCorrect) {
-      return true;
+
+    if (!isPasswordCorrect) {
+      throw new UnauthorizedException();
     }
-    return false;
+
+    return user;
   }
 }
