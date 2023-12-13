@@ -10,6 +10,7 @@ import { SignUpDto } from './dto/sign-up.dto';
 import { EmailIsTakenError } from 'src/users/errors/email-is-taken.error';
 import {LocalAuthGuard} from "./local-auth.guard";
 import { Request } from 'express';
+import {UserDocument} from "../users/entities/user.entity";
 
 @Controller('auth')
 export class AuthController {
@@ -33,6 +34,6 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   logIn(@Req() req : Request) {
-    return this.authService.login(req.user);
+    return this.authService.login(req.user as UserDocument);
   }
 }
