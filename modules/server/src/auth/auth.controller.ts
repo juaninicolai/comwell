@@ -3,12 +3,13 @@ import {
   Controller,
   HttpException,
   HttpStatus,
-  Post,
+  Post, Req, UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignUpDto } from './dto/sign-up.dto';
-import { LogInDto } from './dto/log-in.dto';
 import { EmailIsTakenError } from 'src/users/errors/email-is-taken.error';
+import {LocalAuthGuard} from "./local-auth.guard";
+import { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -29,8 +30,9 @@ export class AuthController {
     }
   }
 
+  @UseGuards(LocalAuthGuard)
   @Post('login')
-  logIn(@Body() logInDto: LogInDto) {
-    return this.authService.logIn(logInDto);
+  logIn(@Req() req : Request) {
+    return req.user;
   }
 }
