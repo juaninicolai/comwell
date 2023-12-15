@@ -1,26 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { CreateHotelDto } from './dto/create-hotel.dto';
-import { UpdateHotelDto } from './dto/update-hotel.dto';
+import { Hotel } from './entities/hotel.entity';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class HotelsService {
-  create(createHotelDto: CreateHotelDto) {
-    return 'This action adds a new hotel';
-  }
+  constructor(@InjectModel(Hotel.name) private hotelModel: Model<Hotel>) { }
 
   findAll() {
-    return `This action returns all hotels`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} hotel`;
-  }
-
-  update(id: number, updateHotelDto: UpdateHotelDto) {
-    return `This action updates a #${id} hotel`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} hotel`;
+    return this.hotelModel.find()
   }
 }
