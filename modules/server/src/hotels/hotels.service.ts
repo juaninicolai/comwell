@@ -50,6 +50,7 @@ export class HotelsService implements OnModuleInit {
         }
         await Promise.all(rooms)
       }
+      // TODO: Create references on the inserted hotels.
     }
   }
 }
