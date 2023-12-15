@@ -5,7 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class HotelsService implements OnModuleInit {
-  constructor(@InjectModel(Hotel.name) private hotelModel: Model<Hotel>) { }
+  constructor(@InjectModel(Hotel.name) private hotelModel: Model<Hotel>) {}
 
   findAll() {
     return this.hotelModel.find();
@@ -18,9 +18,9 @@ export class HotelsService implements OnModuleInit {
     }
 
     await this.hotelModel.insertMany([
-      { city: 'Aalborg' },
-      { city: 'Aarhus' },
-      { city: 'Copenhagen' },
+      { name: 'Aarhus House', city: 'Aarhus', region: 'Jytland' },
+      { name: 'Odense House', city: 'Odense', region: 'Fyn' },
+      { name: 'Copenhagen House', city: 'Copenhagen', region: 'Zealand' },
     ]);
   }
 }

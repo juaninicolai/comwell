@@ -1,10 +1,9 @@
-import { Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
+import { Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
 
-export type RoomDocument = HydratedDocument<Room>
+export type RoomDocument = HydratedDocument<Room>;
 
 @Schema()
-export class Room {
-}
+export class Room {}
 
-export const RoomSchema = SchemaFactory.createForClass(Room)
+export const RoomSchema = SchemaFactory.createForClass(Room);
