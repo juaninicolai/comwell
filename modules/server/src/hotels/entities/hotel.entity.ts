@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import { Room } from './room.entity';
+import type { Room } from './room.entity';
 
 export type HotelDocument = HydratedDocument<Hotel>;
 
@@ -15,7 +15,7 @@ export class Hotel {
   @Prop()
   region: string;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: Room.name }] })
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Room' }] })
   rooms: Room[];
 }
 
