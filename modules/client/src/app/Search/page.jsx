@@ -9,7 +9,7 @@ const SearchBar = () => {
   const [userType, setUserType] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [promoCode, setPromoCode] = useState("");
+
 
   const handleSearch = () => {
     // Implement your search logic here
@@ -32,6 +32,9 @@ const SearchBar = () => {
   };
 
   return (
+
+    <div className=" login flex flex-col items-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="mt-20 ml-20">
     <div className="search">
       <form
         id="form"
@@ -95,24 +98,22 @@ const SearchBar = () => {
           onChange={(e) => setEndDate(e.target.value)}
           className="px-4 py-2 rounded-lg bg-gray-100 w-64"
         />
-        <input
-          type="text"
-          placeholder="Enter promo code"
-          value={promoCode}
-          onChange={(e) => setPromoCode(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-gray-100 w-64"
-        />
-        <div>
-          <button
+
+<button
             id="submit"
             onClick={handleSearch}
-            className="px-4 py-2 rounded-lg bg-blue-500 text-white"
+            className="btn"
           >
-            Search Hotels
+            Book
           </button>
+        <div>
+          
         </div>
       </form>
     </div>
+    </div>
+    </div>
+
   );
 };
 

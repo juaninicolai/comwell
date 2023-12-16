@@ -28,7 +28,8 @@ body {
 
 main,
 .login,
-.signup {
+.signup,
+.bgphoto {
   background: url(./comwell.jpg) no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -45,4 +46,11 @@ main,
   border-radius: 20%;
   height: 35px;
   width: 50px;
+}
+.bookbtn{
+  margin-bottom: 0;
+}
+.hotel{
+  background:url(./navbagground.png);
+  
 }

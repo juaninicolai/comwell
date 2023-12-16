@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
+
 
 const Hotel = ({ hotelData }) => {
   return (
-    <div className="flex flex-grow max-w-full h-full">
-      <div className=" flex flex-col hotel p-2">
+    <div className="flex  flex-grow max-w-full h-full">
+      <div className=" flex hotel flex-col  p-2">
         <img
           className="rounded-sm"
           src={hotelData.img}
@@ -16,9 +18,20 @@ const Hotel = ({ hotelData }) => {
         <p>Location: {hotelData.location}</p>
         <p>Price: {hotelData.price}</p>
         <div>
-          <button onClick={hotelData.handleBooking} className="btn">
-            Book
-          </button>
+          
+          {
+            /* 
+              <Link href={`/HotelDetail?hotelId=${hotelData.id}&name=${hotelData.name}&location=${hotelData.location}`}>
+          <button onClick={hotelData.handleBooking} className="btn"> Book </button>
+        </Link>
+            
+            */
+          }
+          <Link href={`/Search`}>
+          <button onClick={hotelData.handleBooking} className="btn"> Book </button>
+        </Link>
+         
+          
         </div>
 
         {/* Add more data fields as needed */}

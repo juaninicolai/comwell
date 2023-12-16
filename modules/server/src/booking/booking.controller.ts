@@ -12,7 +12,7 @@ import { CreateBookingDto } from './dto/create-booking.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('hotel')
-@UseGuards(AuthGuard())
+//@UseGuards(AuthGuard())
 export class BookingController {
   constructor(private bookingService: BookingService) { }
 
