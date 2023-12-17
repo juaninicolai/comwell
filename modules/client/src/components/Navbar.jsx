@@ -1,15 +1,23 @@
 
 "use client"
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useCookies } from 'next-client-cookies';
+import { useEffect } from "react";
 
 function Navbar() {
-  let useremail = "";
-  if (typeof window !== 'undefined') {
-    // Perform localStorage action
-    useremail = localStorage.getItem("username");
-  }
+  const [useremail, setUseremail]= useState("");
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      // Perform localStorage action
+      setUseremail(localStorage.getItem("username"));
+  
+    }
+
+  },[])
+
+  
+ 
 
   
   const cookies = useCookies();
@@ -51,30 +59,38 @@ function Navbar() {
 
             {useremail ? (
             // If the user is logged in, display their email
-            <span>{useremail}
             <div>
-            <Link href={"/Logout"}>
-              Logout
-            </Link>
+               <span className="mr-5">{useremail}
+
+                  </span>
+                  <span>
+                    <Link href={"/Logout"}>
+                    Logout
+                  </Link>
+                  </span>
             </div>
-            
-            </span>
-            
+           
 
           ) : (
             // If the user is not logged in, display the login button
-            <Link href={"/Login"}>
+            <div>
+              <Link href={"/Login"}>
               Login
             </Link>
-          )}
-
-            
-          </li>
-          <li>
+            <li>
             {" "}
             
             <Link href={"/"}>Menu</Link>{" "}
           </li>
+            </div>
+            
+            
+          )
+          }
+
+            
+          </li>
+          
         </ul>
       </nav>
     </header>
