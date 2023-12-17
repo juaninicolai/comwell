@@ -77,11 +77,7 @@ function Navbar() {
               <Link href={"/Login"}>
               Login
             </Link>
-            <li>
-            {" "}
-            
-            <Link href={"/"}>Menu</Link>{" "}
-          </li>
+          
             </div>
             
             
