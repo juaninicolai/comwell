@@ -31,6 +31,7 @@ main,
 .signup,
 .bgphoto {
   background: url(./comwell.jpg) no-repeat center center;
+  background-attachment: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -38,6 +39,7 @@ main,
 }
 .search {
   height: 100vh;
+  
 }
 
 .btn {
@@ -53,4 +55,8 @@ main,
 .hotel{
   background:url(./navbagground.png);
   
+}
+.borderbox{
+  border: 1px dashed green;
+  padding:5px;
 }
