@@ -12,6 +12,7 @@ import { JwtStrategy } from './jwt.strategy';
     UsersModule,
     PassportModule,
     JwtModule.register({
+      //TODO extract this constant to an env variable file?
       secret: 'secret',
       signOptions: { expiresIn: '1d' },
     }),
