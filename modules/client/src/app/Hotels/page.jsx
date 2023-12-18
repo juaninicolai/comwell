@@ -2,6 +2,7 @@
 import React from "react";
 import Hotel from "@/components/Hotel";
 import Link from "next/link";
+import CookieConsent from "@/components/CookieConsent";
 
 // remove this code if the backend gets ready
 
@@ -78,6 +79,8 @@ const hotelsData = [
 
 const Hotels = () => {
   return (
+<>
+<CookieConsent />
 <div className="login flex flex-col items-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
       <div className="mt-20 ml-20">
 
@@ -95,6 +98,10 @@ const Hotels = () => {
     </div>
     </div>
     </div>
+
+
+</>
+
 
   );
 };

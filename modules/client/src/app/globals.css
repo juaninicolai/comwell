@@ -60,3 +60,11 @@ main,
   border: 1px dashed green;
   padding:5px;
 }
+.consent{
+  background-color: yellowgreen;
+  opacity: 0.8;
+}
+.consentbtn{
+  background-color: green;
+  color: white
+}

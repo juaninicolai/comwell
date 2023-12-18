@@ -1,10 +1,15 @@
+"use client"
 import Image from "next/image";
 import Display from "@/components/Locations";
+import CookieConsent from "@/components/CookieConsent";
 
 export default function Home() {
+
+
   return (
-     
-    <div class=" login flex flex-col items-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
+     <>
+     <CookieConsent />
+     <div class=" login flex flex-col items-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
     <div class="mt-20 ml-20 w-64">
       <span>
         <strong>
@@ -20,6 +25,8 @@ export default function Home() {
       
       </div>
       </div>
+     </>
+    
     
     
     

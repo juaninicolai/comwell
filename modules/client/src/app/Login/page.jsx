@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
+import CookieConsent from "@/components/CookieConsent";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -48,6 +49,9 @@ function Login() {
   };
 
   return (
+
+    <>
+    <CookieConsent />
     <div className=" login flex flex-col items-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
       <div className="mt-20 ml-20">
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -102,6 +106,8 @@ function Login() {
         </form>
       </div>
     </div>
+    </>
+    
   );
 }
 

@@ -38,6 +38,11 @@ function Navbar() {
   return (
     <header className="fixed top-0 w-full">
       <nav className="  navbar h-30 py-2 font-semibold px-3 flex justify-between  ">
+        
+        
+        
+        
+        
         <div className="logo">
           {" "}
           <Link href={"/"}>

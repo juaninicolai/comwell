@@ -24,7 +24,7 @@ function Logout() {
   return (
     <div className=" login flex flex-col items-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
     <div className="mt-20 ml-20">
-    <div> Suceesfully logged out </div>
+    <div> Successfully logged out </div>
     <Link
               href={"/Login"}
               class="font-medium text-primary-600 hover:underline dark:text-primary-500"
