@@ -1,6 +1,6 @@
 import { ExecutionContext, createParamDecorator } from '@nestjs/common';
+import { UserDocument } from './entities/user.entity';
 
-//TODO should we enforce type safety here? fx: createParamDecorator<string>
-export const User = createParamDecorator((_, ctx: ExecutionContext) => {
+export const User = createParamDecorator((_, ctx: ExecutionContext): UserDocument => {
   return ctx.switchToHttp().getRequest().user;
 });
