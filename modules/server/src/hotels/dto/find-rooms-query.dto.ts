@@ -5,10 +5,10 @@ export class FindRoomsQueryDto {
   @Type(() => Date)
   @IsDate()
   @IsOptional()
-  from: Date;
+  from?: Date;
 
   @Type(() => Date)
   @IsDate()
   @IsOptional()
-  to: Date;
+  to?: Date;
 }

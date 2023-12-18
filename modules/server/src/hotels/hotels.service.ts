@@ -11,14 +11,14 @@ export class HotelsService implements OnModuleInit {
     @InjectModel(Hotel.name) private hotelModel: Model<Hotel>,
     @InjectModel(RoomType.name) private roomTypeModel: Model<RoomType>,
     @InjectModel(Room.name) private roomModel: Model<Room>,
-  ) {}
+  ) { }
 
   findAll() {
     return this.hotelModel.find();
   }
 
-  findRooms() {
-    throw new Error('Method not implemented.');
+  findRooms(id: string, from?: Date, to?: Date) {
+    return this.roomModel.find({ hotel: id });
   }
 
   async onModuleInit() {

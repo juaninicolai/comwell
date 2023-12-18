@@ -14,7 +14,7 @@ export class HotelsController {
 
   @Get(':id/rooms')
   findRooms(@Param() params: FindRoomsParamsDto, @Query() query: FindRoomsQueryDto) {
-    return this.hotelsService.findRooms();
+    return this.hotelsService.findRooms(params.id, query.from, query.to);
   }
 
   //In addition to validating request bodies, the ValidationPipe can be used with other request object properties as well.
