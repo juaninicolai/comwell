@@ -17,4 +17,4 @@ import { RoomType, RoomTypeSchema } from './entities/room-type.entity';
   controllers: [HotelsController],
   providers: [HotelsService],
 })
-export class HotelsModule { }
+export class HotelsModule {}

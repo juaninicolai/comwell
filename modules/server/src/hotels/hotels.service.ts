@@ -11,7 +11,7 @@ export class HotelsService implements OnModuleInit {
     @InjectModel(Hotel.name) private hotelModel: Model<Hotel>,
     @InjectModel(RoomType.name) private roomTypeModel: Model<RoomType>,
     @InjectModel(Room.name) private roomModel: Model<Room>,
-  ) { }
+  ) {}
 
   findAll() {
     return this.hotelModel.find({});
@@ -33,22 +33,25 @@ export class HotelsService implements OnModuleInit {
       { name: 'standard', capacity: 2 },
       { name: 'superior', capacity: 3 },
       { name: 'suite', capacity: 5 },
-    ])
+    ]);
 
     for (const insertedHotel of insertedHotels) {
       for (const insertedRoomType of insertedRoomTypes) {
         const numberOfRooms = {
-          'standard': 50,
-          'superior': 25,
-          'suite': 10,
-        }[insertedRoomType.name]
+          standard: 50,
+          superior: 25,
+          suite: 10,
+        }[insertedRoomType.name];
 
-        const rooms = []
+        const rooms = [];
         for (let i = 0; i < numberOfRooms; i++) {
-          const room = new this.roomModel({ hotel: insertedHotel, type: insertedRoomType })
-          rooms.push(room.save())
+          const room = new this.roomModel({
+            hotel: insertedHotel,
+            type: insertedRoomType,
+          });
+          rooms.push(room.save());
         }
-        await Promise.all(rooms)
+        await Promise.all(rooms);
       }
       // TODO: Create references on the inserted hotels.
       // TODO: Build /hotels/:id/rooms?from=&to= -> [{type: "standard", capacity: 1}]

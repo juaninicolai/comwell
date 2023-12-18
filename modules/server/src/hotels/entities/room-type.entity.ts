@@ -6,10 +6,10 @@ export type RoomTypeDocument = HydratedDocument<RoomType>;
 @Schema()
 export class RoomType {
   @Prop()
-  name: string
+  name: string;
 
   @Prop()
-  capacity: number
+  capacity: number;
 }
 
 export const RoomTypeSchema = SchemaFactory.createForClass(RoomType);

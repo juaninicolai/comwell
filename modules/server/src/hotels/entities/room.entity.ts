@@ -8,10 +8,10 @@ export type RoomDocument = HydratedDocument<Room>;
 @Schema()
 export class Room {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Hotel.name })
-  hotel: Hotel
+  hotel: Hotel;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: RoomType.name })
-  type: RoomType
+  type: RoomType;
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room);

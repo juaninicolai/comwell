@@ -9,6 +9,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
+      // Not the best practice, we should ideally have this coming as an
+      // environment variable and outside of Git.
       secretOrKey: 'secret',
     });
   }

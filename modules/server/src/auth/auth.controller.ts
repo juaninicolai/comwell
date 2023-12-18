@@ -44,7 +44,6 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  //TODO when would we use ValidationPipe for a custom decorator? => {validateCustomDecorators: true}
   getProfile(@User() user: UserDocument) {
     return user;
   }

@@ -12,7 +12,8 @@ import { JwtStrategy } from './jwt.strategy';
     UsersModule,
     PassportModule,
     JwtModule.register({
-      //TODO extract this constant to an env variable file?
+      // Not the best practice, we should ideally have this coming as an
+      // environment variable and outside of Git.
       secret: 'secret',
       signOptions: { expiresIn: '1d' },
     }),
