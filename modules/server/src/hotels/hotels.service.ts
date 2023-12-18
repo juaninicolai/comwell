@@ -17,6 +17,10 @@ export class HotelsService implements OnModuleInit {
     return this.hotelModel.find();
   }
 
+  findRooms() {
+    throw new Error('Method not implemented.');
+  }
+
   async onModuleInit() {
     const countOfHotels = await this.hotelModel.countDocuments();
     if (countOfHotels > 0) {
