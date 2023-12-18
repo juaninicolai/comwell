@@ -1,9 +1,10 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Hotel } from './entities/hotel.entity';
-import { Model } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { RoomType } from './entities/room-type.entity';
-import { Room } from './entities/room.entity';
+import { Room, RoomDocument } from './entities/room.entity';
+import { faker } from '@faker-js/faker';
 
 @Injectable()
 export class HotelsService implements OnModuleInit {
@@ -18,7 +19,16 @@ export class HotelsService implements OnModuleInit {
   }
 
   findRooms(id: string, from?: Date, to?: Date) {
-    return this.roomModel.find({ hotel: id });
+    const filter: FilterQuery<RoomDocument> = {
+      hotel: id,
+    }
+
+    if (from !== undefined && to !== undefined) {
+      filter.bookedFrom = { $gte: to }
+      filter.bookedTo = { $lte: from }
+    }
+    return this.roomModel.find(filter);
+
   }
 
   async onModuleInit() {
@@ -29,8 +39,8 @@ export class HotelsService implements OnModuleInit {
 
     const insertedHotels = await this.hotelModel.insertMany([
       { name: 'Aarhus House', city: 'Aarhus', region: 'Jytland' },
-      { name: 'Odense House', city: 'Odense', region: 'Fyn' },
-      { name: 'Copenhagen House', city: 'Copenhagen', region: 'Zealand' },
+      // { name: 'Odense House', city: 'Odense', region: 'Fyn' },
+      // { name: 'Copenhagen House', city: 'Copenhagen', region: 'Zealand' },
     ]);
 
     const insertedRoomTypes = await this.roomTypeModel.insertMany([
@@ -42,16 +52,20 @@ export class HotelsService implements OnModuleInit {
     for (const insertedHotel of insertedHotels) {
       for (const insertedRoomType of insertedRoomTypes) {
         const numberOfRooms = {
-          standard: 50,
-          superior: 25,
-          suite: 10,
+          standard: 1,
+          superior: 1,
+          suite: 1,
         }[insertedRoomType.name];
 
         const rooms = [];
         for (let i = 0; i < numberOfRooms; i++) {
+          const bookedFrom = faker.date.past()
+          const bookedTo = faker.date.between({ from: bookedFrom, to: new Date() })
           const room = new this.roomModel({
             hotel: insertedHotel,
             type: insertedRoomType,
+            bookedFrom,
+            bookedTo
           });
           rooms.push(room.save());
         }

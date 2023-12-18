@@ -12,6 +12,12 @@ export class Room {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: RoomType.name })
   type: RoomType;
+
+  @Prop({ required: false, default: null })
+  bookedFrom: Date | null
+
+  @Prop({ required: false, default: null })
+  bookedTo: Date | null
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room);
