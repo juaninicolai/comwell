@@ -11,10 +11,10 @@ export class HotelsService implements OnModuleInit {
     @InjectModel(Hotel.name) private hotelModel: Model<Hotel>,
     @InjectModel(RoomType.name) private roomTypeModel: Model<RoomType>,
     @InjectModel(Room.name) private roomModel: Model<Room>,
-  ) {}
+  ) { }
 
   findAll() {
-    return this.hotelModel.find({});
+    return this.hotelModel.find();
   }
 
   async onModuleInit() {
@@ -53,7 +53,6 @@ export class HotelsService implements OnModuleInit {
         }
         await Promise.all(rooms);
       }
-      // TODO: Create references on the inserted hotels.
       // TODO: Build /hotels/:id/rooms?from=&to= -> [{type: "standard", capacity: 1}]
     }
   }
