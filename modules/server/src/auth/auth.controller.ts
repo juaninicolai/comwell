@@ -14,14 +14,15 @@ import { EmailIsTakenError } from 'src/users/errors/email-is-taken.error';
 import { LocalAuthGuard } from './local-auth.guard';
 import { Request } from 'express';
 import { UserDocument } from '../users/entities/user.entity';
-import { JwtAuthGuard } from './jwt-auth.guard';
 import { User } from 'src/users/user.decorator';
+import { Public } from './public.decorator';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('signup')
+  @Public()
   async signUp(@Body() signUpDto: SignUpDto) {
     try {
       return await this.authService.signUp(signUpDto);
@@ -38,11 +39,11 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
+  @Public()
   logIn(@Req() req: Request) {
     return this.authService.login(req.user as UserDocument);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@User() user: UserDocument) {
     return user;
