@@ -73,7 +73,6 @@ export class HotelsService implements OnModuleInit {
         }
         await Promise.all(rooms);
       }
-      // TODO: Build /hotels/:id/rooms?from=&to= -> [{type: "standard", capacity: 1}]
     }
   }
 }
