@@ -1,10 +1,10 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
-import { Hotel } from './entities/hotel.entity';
-import { FilterQuery, Model } from 'mongoose';
-import { InjectModel } from '@nestjs/mongoose';
-import { RoomType } from './entities/room-type.entity';
-import { Room, RoomDocument } from './entities/room.entity';
-import { faker } from '@faker-js/faker';
+import {Injectable, OnModuleInit} from '@nestjs/common';
+import {Hotel} from './entities/hotel.entity';
+import {FilterQuery, Model} from 'mongoose';
+import {InjectModel} from '@nestjs/mongoose';
+import {RoomType} from './entities/room-type.entity';
+import {Room, RoomDocument} from './entities/room.entity';
+import {faker} from '@faker-js/faker';
 
 @Injectable()
 export class HotelsService implements OnModuleInit {
@@ -24,8 +24,10 @@ export class HotelsService implements OnModuleInit {
     }
 
     if (from !== undefined && to !== undefined) {
-      filter.bookedFrom = { $gte: to }
-      filter.bookedTo = { $lte: from }
+        filter.$or = [
+            { bookedFrom: { $gte: to } },
+            { bookedTo: { $lte: from } },
+        ];
     }
     return this.roomModel.find(filter);
 
@@ -39,8 +41,8 @@ export class HotelsService implements OnModuleInit {
 
     const insertedHotels = await this.hotelModel.insertMany([
       { name: 'Aarhus House', city: 'Aarhus', region: 'Jytland' },
-      // { name: 'Odense House', city: 'Odense', region: 'Fyn' },
-      // { name: 'Copenhagen House', city: 'Copenhagen', region: 'Zealand' },
+      { name: 'Odense House', city: 'Odense', region: 'Fyn' },
+      { name: 'Copenhagen House', city: 'Copenhagen', region: 'Zealand' },
     ]);
 
     const insertedRoomTypes = await this.roomTypeModel.insertMany([
