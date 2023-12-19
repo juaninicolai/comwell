@@ -5,7 +5,7 @@ import { FindRoomsQueryDto } from './dto/find-rooms-query.dto';
 
 @Controller('hotels')
 export class HotelsController {
-  constructor(private readonly hotelsService: HotelsService) { }
+  constructor(private readonly hotelsService: HotelsService) {}
 
   @Get()
   findAll() {
@@ -13,7 +13,10 @@ export class HotelsController {
   }
 
   @Get(':id/rooms')
-  findRooms(@Param() params: FindRoomsParamsDto, @Query() query: FindRoomsQueryDto) {
+  findRooms(
+    @Param() params: FindRoomsParamsDto,
+    @Query() query: FindRoomsQueryDto,
+  ) {
     return this.hotelsService.findRooms(params.id, query.from, query.to);
   }
 }

@@ -14,10 +14,10 @@ export class Room {
   type: RoomType;
 
   @Prop({ required: false, default: null })
-  bookedFrom: Date | null
+  bookedFrom: Date | null;
 
   @Prop({ required: false, default: null })
-  bookedTo: Date | null
+  bookedTo: Date | null;
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room);
