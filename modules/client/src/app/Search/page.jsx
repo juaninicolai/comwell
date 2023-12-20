@@ -4,20 +4,81 @@ import checkLoggedIn from "@/components/CheckLoggedIn";
 import React, { useState } from "react";
 import Link from "next/link";
 import CookieConsent from "@/components/CookieConsent";
+import { useCookies } from 'next-client-cookies';
+
 
 const SearchBar = () => {
   const [hotelName, setHotelName] = useState("");
-  const [rooms, setRooms] = useState(0);
+  const [roomType, setRoomType] = useState(0);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [days, setDays] = useState(0)
+  const [flag, setFlag] = useState(true);
+  const [price, setPrice] = useState(0)
+  const cookies = useCookies();
 
   const selectedhotel = JSON.stringify({
     hotelName,
-    rooms,
+    roomType,
     startDate,
     endDate
   })
+
+  
+const handleIt = () =>{
+  
+  const date1 = new Date(startDate);
+  const date2 = new Date(endDate);
+
+  const diff = date2 - date1
+  const days = diff / (24*60*60*1000);
+  
+  if(roomType === "normal"){
+    setPrice(1000)
+  }
+  if(roomType === "standard"){
+    setPrice(1500)
+  }
+  if(roomType === "deluxe"){
+    setPrice(2000)
+  }
+
+const mycookie = getCookie();
+console.log(mycookie);
+  
+
+  var headers = new Headers();
+  headers.append("Cookie",`jwt=${mycookie}`)
+  headers.append("Content-Type", "application/x-www-form-urlencoded");
+
+  const urlencoded = new URLSearchParams();
+  urlencoded.append("name", hotelName);
+  urlencoded.append("price", price);
+  urlencoded.append("category",roomType);
+  urlencoded.append("from",startDate);
+  urlencoded.append("to",endDate);
+
+  const bookingOptions = {
+    method: 'POST',
+    headers: headers,
+    body: urlencoded
+  }
+
+  console.log(urlencoded);
+  console.log(bookingOptions);
+  fetch("http://localhost:3001/hotel/booking", bookingOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+}
+
+
+const getCookie = ()=> {
+  
+  const token = cookies.get("jwt");
+  return token;
+}
 
   /*
   function parseJwt(token) {
@@ -37,7 +98,7 @@ const SearchBar = () => {
     const hotelid = hotelName.split(" ");
     const id = Number(hotelid[0])
     console.log(id);
-    const response = await fetch(`http://localhost:3001/${id}hotels/bookings`, {
+    const response = await fetch(`http://localhost:3001/hotel/booking`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,14 +117,7 @@ const SearchBar = () => {
       console.log("else is called");
     }
 
-    /*
-    console.log('Searching...',hotelName,userType,startDate,endDate,promoCode);
-    setHotelName('');
-    setEndDate('');
-    setUserType('');
-    setPromoCode('');
-    setStartDate('');
-*/
+  
 
 const Handlebooking = ()=>{
 
@@ -85,7 +139,7 @@ const Handlebooking = ()=>{
           id="hotelname"
           value={hotelName}
           onChange={(e) => setHotelName(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-gray-100 w-64"
+          className="px-4 py-2 rounded-lg bg-gray-100 w-64" required
         >
           <option value="">Select HotelName</option>
           <option value="1 Aarhus">Aarhus</option>
@@ -114,33 +168,33 @@ const Handlebooking = ()=>{
         </select>
         <select
           id="rooms"
-          value={rooms}
-          onChange={(e) => setRooms(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-gray-100 w-64"
+          value={roomType}
+          onChange={(e) => setRoomType(e.target.value)}
+          className="px-4 py-2 rounded-lg bg-gray-100 w-64" required
         >
-          <option value="">Select rooms</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          <option value="">Select Category</option>
+          <option value="normal">Normal</option>
+          <option value="standard">Standard</option>
+          <option value="deluxe">Deluxe</option>
         </select>
         <input
           type="date"
           placeholder="Start Date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-gray-100 w-64"
+          className="px-4 py-2 rounded-lg bg-gray-100 w-64" required
         />
         <input
           type="date"
           placeholder="End Date"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-gray-100 w-64"
+          className="px-4 py-2 rounded-lg bg-gray-100 w-64" required
         />
-
+          
 
               <Link href={`/HotelDetail?selectedHotel=${selectedhotel}`}>
-              <button id="submit" className="btn">
+              <button onClick={handleIt} id="submit" className="btn">
             Book
           </button>
         </Link>
