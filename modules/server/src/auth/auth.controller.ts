@@ -41,7 +41,6 @@ export class AuthController {
     }
   }
 
-  //TODO if we send wrong credentials, we get 500 error => error not handled
   @ApiOkResponse({
     type: AccessTokenDto
   })
