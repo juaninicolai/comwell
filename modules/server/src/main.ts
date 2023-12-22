@@ -13,6 +13,7 @@ async function bootstrap() {
     .setDescription('The Comwell Hotels API description')
     .setVersion('1.0')
     .addTag('comwell')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

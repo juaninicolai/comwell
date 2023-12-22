@@ -2,10 +2,11 @@ import { Controller, Get, Param, Query } from '@nestjs/common';
 import { HotelsService } from './hotels.service';
 import { FindRoomsParamsDto } from './dto/find-rooms-params.dto';
 import { FindRoomsQueryDto } from './dto/find-rooms-query.dto';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 import { Hotel } from './entities/hotel.entity';
 import { RoomType } from './entities/room-type.entity';
 
+@ApiBearerAuth()
 @Controller('hotels')
 export class HotelsController {
   constructor(private readonly hotelsService: HotelsService) { }
