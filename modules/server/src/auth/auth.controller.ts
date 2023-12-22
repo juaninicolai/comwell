@@ -50,6 +50,9 @@ export class AuthController {
     return this.authService.login(loginDto);
   }
 
+  @ApiOkResponse({
+    type: UserEntity
+  })
   @ApiBearerAuth()
   @Get('profile')
   getProfile(@User() user: UserDocument) {
