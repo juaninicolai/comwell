@@ -2,26 +2,25 @@
 "use client"
 import Link from "next/link";
 import React, { useState } from "react";
-import { useCookies } from 'next-client-cookies';
 import { useEffect } from "react";
 
 function Navbar() {
   const [useremail, setUseremail]= useState("");
+  //const cookies = useCookies();
+  //const token = cookies.get("jwt");
+
+
   useEffect(()=>{
     if (typeof window !== 'undefined') {
       // Perform localStorage action
       setUseremail(localStorage.getItem("username"));
-  
     }
 
   },[])
 
-  
- 
+  /*
+  import { useCookies } from 'next-client-cookies';
 
-  
-  const cookies = useCookies();
-  const token = cookies.get("jwt");
 
   function parseJwt(token) {
     if (!token) { return; }
@@ -33,7 +32,7 @@ function Navbar() {
   console.log(userDetails);
   //"657dcfad74850362c8408ae7"
 
-
+*/
 
   return (
     <header className="fixed top-0 w-full">

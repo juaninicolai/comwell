@@ -128,8 +128,7 @@ const Handlebooking = ()=>{
     <>
     <CookieConsent />
     <div className=" login flex flex-col items-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <div className="mt-20 ml-20">
-    <div className="search">
+      <div className="mt-20 ml-20 search">
       <form
         id="form"
         className=" m-20 flex flex-col justify-start space-y-4"
@@ -207,7 +206,6 @@ const Handlebooking = ()=>{
           
         </div>
       </form>
-    </div>
     </div>
     </div>
     </>

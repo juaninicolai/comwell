@@ -9,8 +9,8 @@ export default function Home() {
   return (
      <>
      <CookieConsent />
-     <div class=" login flex flex-col items-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
-    <div class="mt-20 ml-20 w-64">
+     <div className=" login flex flex-col items-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <div className="mt-20 ml-20 w-64">
       <span>
         <strong>
         Comwell represents a collection of 16 hotels situated in Denmark, 

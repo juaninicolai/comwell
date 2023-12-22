@@ -27,7 +27,7 @@ function Logout() {
     <div> Successfully logged out </div>
     <Link
               href={"/Login"}
-              class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+              className="font-medium text-primary-600 hover:underline dark:text-primary-500"
             >
               Go to login page
             </Link>

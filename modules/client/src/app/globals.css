@@ -31,7 +31,7 @@ main,
 .signup,
 .bgphoto {
   background: url(./comwell.jpg) no-repeat center center;
-  background-attachment: fixed;
+  background-attachment: auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
