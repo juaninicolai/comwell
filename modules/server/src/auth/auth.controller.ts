@@ -5,21 +5,18 @@ import {
   HttpException,
   HttpStatus,
   Post,
-  Req,
-  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignUpDto } from './dto/sign-up.dto';
 import { EmailIsTakenError } from 'src/users/errors/email-is-taken.error';
-import { LocalAuthGuard } from './local-auth.guard';
-import { Request } from 'express';
 import { UserDocument } from '../users/entities/user.entity';
 import { User } from 'src/users/user.decorator';
 import { Public } from './public.decorator';
+import { LogInDto } from './dto/log-in.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   @Post('signup')
   @Public()
@@ -38,11 +35,10 @@ export class AuthController {
   }
 
   //TODO if we send wrong credentials, we get 500 error => error not handled
-  @UseGuards(LocalAuthGuard)
   @Post('login')
   @Public()
-  logIn(@Req() req: Request) {
-    return this.authService.login(req.user as UserDocument);
+  logIn(@Body() loginDto: LogInDto) {
+    return this.authService.login(loginDto);
   }
 
   @Get('profile')
