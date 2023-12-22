@@ -21,6 +21,7 @@ import { AccessTokenDto } from './dto/access-token.dto';
 export class AuthController {
   constructor(private authService: AuthService) { }
 
+  // TODO: Include _id in response schemas.
   @ApiOkResponse({
     type: UserEntity
   })
