@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { RoomType } from './entities/room-type.entity';
 import { Room, RoomDocument } from './entities/room.entity';
 import { faker } from '@faker-js/faker';
+import { Booking } from './entities/booking.entity';
 
 @Injectable()
 export class HotelsService implements OnModuleInit {
@@ -12,7 +13,8 @@ export class HotelsService implements OnModuleInit {
     @InjectModel(Hotel.name) private hotelModel: Model<Hotel>,
     @InjectModel(RoomType.name) private roomTypeModel: Model<RoomType>,
     @InjectModel(Room.name) private roomModel: Model<Room>,
-  ) {}
+    @InjectModel(Booking.name) private bookingModel: Model<Booking>,
+  ) { }
 
   findAll() {
     return this.hotelModel.find();
@@ -29,6 +31,11 @@ export class HotelsService implements OnModuleInit {
 
     const availableRooms = await this.roomModel.find(filter).distinct('type');
     return this.roomTypeModel.find({ _id: { $in: availableRooms } });
+  }
+
+  async bookRoom(id: string, from: Date, to: Date) {
+    // TODO: Create booking.
+    console.log(id, from, to)
   }
 
   async onModuleInit() {
