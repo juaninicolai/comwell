@@ -58,4 +58,6 @@ export class AuthController {
   getProfile(@User() user: UserDocument) {
     return user;
   }
+
+  // TODO: Implement logout.
 }
