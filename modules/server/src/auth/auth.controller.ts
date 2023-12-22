@@ -11,14 +11,18 @@ import { SignUpDto } from './dto/sign-up.dto';
 import { EmailIsTakenError } from 'src/users/errors/email-is-taken.error';
 import { UserDocument } from '../users/entities/user.entity';
 import { User } from 'src/users/user.decorator';
+import { User as UserEntity } from 'src/users/entities/user.entity';
 import { Public } from './public.decorator';
 import { LogInDto } from './dto/log-in.dto';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) { }
 
+  @ApiOkResponse({
+    type: UserEntity
+  })
   @Post('signup')
   @Public()
   async signUp(@Body() signUpDto: SignUpDto) {
