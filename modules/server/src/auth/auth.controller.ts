@@ -15,6 +15,7 @@ import { User as UserEntity } from 'src/users/entities/user.entity';
 import { Public } from './public.decorator';
 import { LogInDto } from './dto/log-in.dto';
 import { ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
+import { AccessTokenDto } from './dto/access-token.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -40,6 +41,9 @@ export class AuthController {
   }
 
   //TODO if we send wrong credentials, we get 500 error => error not handled
+  @ApiOkResponse({
+    type: AccessTokenDto
+  })
   @Post('login')
   @Public()
   logIn(@Body() loginDto: LogInDto) {
