@@ -13,6 +13,7 @@ import { UserDocument } from '../users/entities/user.entity';
 import { User } from 'src/users/user.decorator';
 import { Public } from './public.decorator';
 import { LogInDto } from './dto/log-in.dto';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('auth')
 export class AuthController {
@@ -41,6 +42,7 @@ export class AuthController {
     return this.authService.login(loginDto);
   }
 
+  @ApiBearerAuth()
   @Get('profile')
   getProfile(@User() user: UserDocument) {
     return user;
