@@ -9,13 +9,15 @@ import { useCookies } from 'next-client-cookies';
 
 const SearchBar = () => {
   const [hotelName, setHotelName] = useState("");
-  const [roomType, setRoomType] = useState(0);
+  const [roomType, setRoomType] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [days, setDays] = useState(0)
   const [flag, setFlag] = useState(true);
   const [price, setPrice] = useState(0)
   const cookies = useCookies();
+  const today = new Date().toISOString().split('T')[0];
+
 
   const selectedhotel = JSON.stringify({
     hotelName,
@@ -172,12 +174,13 @@ const Handlebooking = ()=>{
           className="px-4 py-2 rounded-lg bg-gray-100 w-64" required
         >
           <option value="">Select Category</option>
-          <option value="normal">Normal</option>
-          <option value="standard">Standard</option>
-          <option value="deluxe">Deluxe</option>
+          <option value="1000 normal">Normal</option>
+          <option value="1500 standard">Standard</option>
+          <option value="2000 deluxe">Deluxe</option>
         </select>
         <input
           type="date"
+          id="startDate"
           placeholder="Start Date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
@@ -185,6 +188,7 @@ const Handlebooking = ()=>{
         />
         <input
           type="date"
+          id="endDate"
           placeholder="End Date"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
@@ -198,10 +202,6 @@ const Handlebooking = ()=>{
           </button>
         </Link>
             
-          
-
-
-
         <div>
           
         </div>
