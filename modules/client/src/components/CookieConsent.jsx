@@ -1,5 +1,6 @@
 import React from "react";
 import { hasCookie, setCookie } from "cookies-next";
+import Link from "next/link";
 
 const CookieConsent = (props) => {
   const [showConsent, setShowConsent] = React.useState(true);
@@ -12,6 +13,8 @@ const CookieConsent = (props) => {
     setShowConsent(true);
     setCookie("localConsent", "true", {});
   };
+
+
 
   if (showConsent) {
     return null;
@@ -29,6 +32,10 @@ const CookieConsent = (props) => {
         <button className=" consentBtn bg-green-500 py-2 px-8 rounded text-white" onClick={() => acceptCookie()}>
           Accept
         </button>
+
+        <Link href={"/Byebye"}><button className=" consentBtn bg-green-500 py-2 px-8 rounded text-white">
+               Reject </button></Link> 
+        
       </div>
     </div>
   );
