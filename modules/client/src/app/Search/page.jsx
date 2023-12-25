@@ -167,17 +167,6 @@ const Handlebooking = ()=>{
           <option value="22 Holte">Holte</option>
           <option value="23 Varbergs Kusthotell">Varbergs Kusthotell</option>
         </select>
-        <select
-          id="rooms"
-          value={roomType}
-          onChange={(e) => setRoomType(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-gray-100 w-64" required
-        >
-          <option value="">Select Category</option>
-          <option value="1000 normal">Normal</option>
-          <option value="1500 standard">Standard</option>
-          <option value="2000 deluxe">Deluxe</option>
-        </select>
         <input
           type="date"
           id="startDate"
@@ -198,7 +187,7 @@ const Handlebooking = ()=>{
 
               <Link href={`/HotelDetail?selectedHotel=${selectedhotel}`}>
               <button onClick={handleIt} id="submit" className="btn">
-            Book
+            Find
           </button>
         </Link>
             
