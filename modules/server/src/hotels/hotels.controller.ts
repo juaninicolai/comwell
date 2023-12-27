@@ -10,7 +10,7 @@ import {
 import { HotelsService } from './hotels.service';
 import { FindRoomsParamsDto } from './dto/find-rooms-params.dto';
 import { FindRoomsQueryDto } from './dto/find-rooms-query.dto';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 import { Hotel } from './entities/hotel.entity';
 import { RoomType } from './entities/room-type.entity';
 import { Public } from 'src/auth/public.decorator';
@@ -19,10 +19,11 @@ import { InvalidRoomTypeError } from './errors/invalid-room-type.error';
 import { User } from 'src/users/user.decorator';
 import { UserDocument } from 'src/users/entities/user.entity';
 import { UnavailableRoomError } from './errors/unavailable-room.error';
+import { Booking } from './entities/booking.entity';
 
 @Controller('hotels')
 export class HotelsController {
-  constructor(private readonly hotelsService: HotelsService) {}
+  constructor(private readonly hotelsService: HotelsService) { }
 
   @ApiOkResponse({
     type: Hotel,
@@ -47,6 +48,10 @@ export class HotelsController {
     return this.hotelsService.findRooms(params.id, query.from, query.to);
   }
 
+  @ApiOkResponse({
+    type: Booking,
+  })
+  @ApiBearerAuth()
   @Post(':id/book')
   async bookRoom(
     @User() user: UserDocument,
