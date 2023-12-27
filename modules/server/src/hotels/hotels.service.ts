@@ -4,7 +4,6 @@ import { FilterQuery, Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { RoomType } from './entities/room-type.entity';
 import { Room, RoomDocument } from './entities/room.entity';
-import { faker } from '@faker-js/faker';
 import { Booking } from './entities/booking.entity';
 import { InvalidRoomTypeError } from './errors/invalid-room-type.error';
 import { UnavailableRoomError } from './errors/unavailable-room.error';
@@ -17,7 +16,7 @@ export class HotelsService implements OnModuleInit {
     @InjectModel(RoomType.name) private roomTypeModel: Model<RoomType>,
     @InjectModel(Room.name) private roomModel: Model<Room>,
     @InjectModel(Booking.name) private bookingModel: Model<Booking>,
-  ) {}
+  ) { }
 
   findAll() {
     return this.hotelModel.find();
@@ -120,9 +119,9 @@ export class HotelsService implements OnModuleInit {
     for (const insertedHotel of insertedHotels) {
       for (const insertedRoomType of insertedRoomTypes) {
         const numberOfRooms = {
-          standard: 1,
-          superior: 1,
-          suite: 1,
+          standard: 50,
+          superior: 25,
+          suite: 10,
         }[insertedRoomType.name];
 
         const rooms = [];
