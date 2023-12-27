@@ -28,7 +28,7 @@ const Hotel = ({ hotelData }) => {
             */
           }
           <Link href={`/Search`}>
-          <button onClick={hotelData.handleBooking} className="btn"> Book </button>
+          <button onClick={hotelData.handleBooking} className="btn"> Find </button>
         </Link>
          
           

@@ -37,6 +37,28 @@ main,
   -o-background-size: cover;
   background-size: cover;
 }
+
+@media screen and (max-width: 700px) {
+  main,
+.login,
+.signup,
+.bgphoto {
+  background: none;
+
+  }
+}
+
+
+.hoverme:hover{
+  background-color: blue;
+  z-index: 100;
+  color: white;
+  margin-top: 5px;
+
+
+}
+
+
 .search {
   height: 100vh;
   
@@ -52,9 +74,9 @@ main,
 .bookbtn{
   margin-bottom: 0;
 }
+
 .hotel{
-  background:url(./navbagground.png);
-  
+  background-color: white;
 }
 .borderbox{
   border: 1px dashed green;
