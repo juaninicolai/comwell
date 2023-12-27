@@ -7,7 +7,7 @@ export type RoomTypeDocument = HydratedDocument<RoomType>;
 @Schema()
 export class RoomType {
   @ApiProperty()
-  @Prop()
+  @Prop({ unique: true })
   name: string;
 
   @ApiProperty()

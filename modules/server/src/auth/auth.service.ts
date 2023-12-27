@@ -10,7 +10,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) { }
+  ) {}
 
   async signUp(signUpDto: SignUpDto) {
     const { email, password: plainTextPassword } = signUpDto;
@@ -21,7 +21,7 @@ export class AuthService {
   async validateUser(email: string, password: string) {
     const user = await this.usersService.findByEmail(email);
     if (user === null) {
-      return null
+      return null;
     }
 
     const isPasswordCorrect = await bcrypt.compare(
@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   async login(loginDto: LogInDto) {
-    const { email, password } = loginDto
+    const { email, password } = loginDto;
     const user = await this.validateUser(email, password);
     if (user === null) {
       throw new UnauthorizedException();

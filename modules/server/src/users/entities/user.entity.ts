@@ -16,7 +16,7 @@ export class User {
 
 export const UserSchema = SchemaFactory.createForClass(User);
 
-UserSchema.methods.toJSON = function() {
+UserSchema.methods.toJSON = function () {
   const object = this.toObject();
   delete object.hashedPassword;
   return object;

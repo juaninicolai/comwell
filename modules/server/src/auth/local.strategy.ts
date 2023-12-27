@@ -9,6 +9,5 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     super({ usernameField: 'email' });
   }
 
-  async validate(email: string, password: string) {
-  }
+  async validate(email: string, password: string) {}
 }

@@ -42,7 +42,7 @@ function Login() {
     }
 
     const { token } = body;
-    document.cookie = "jwt=" + token
+    document.cookie = "jwt=" + token;
     location.href = "/";
   };
 

@@ -19,4 +19,4 @@ import { Booking, BookingSchema } from './entities/booking.entity';
   controllers: [HotelsController],
   providers: [HotelsService],
 })
-export class HotelsModule { }
+export class HotelsModule {}
