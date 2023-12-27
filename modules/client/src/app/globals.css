@@ -90,3 +90,9 @@ main,
   background-color: green;
   color: white
 }
+.bgimage{
+  background-color: white;
+  border: 1px solid red;
+  border-radius:10px;
+
+}

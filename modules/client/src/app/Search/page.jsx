@@ -8,72 +8,22 @@ import { useCookies } from 'next-client-cookies';
 
 
 const SearchBar = () => {
-  const [hotelName, setHotelName] = useState("");
-  const [roomType, setRoomType] = useState("");
+  const [hotelId, setHotelId] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [days, setDays] = useState(0)
-  const [flag, setFlag] = useState(true);
-  const [price, setPrice] = useState(0)
+ 
   const cookies = useCookies();
-  const today = new Date().toISOString().split('T')[0];
 
 
   const selectedhotel = JSON.stringify({
-    hotelName,
-    roomType,
+    hotelId,
     startDate,
     endDate
   })
 
   
-const handleIt = () =>{
-  
-  const date1 = new Date(startDate);
-  const date2 = new Date(endDate);
 
-  const diff = date2 - date1
-  const days = diff / (24*60*60*1000);
-  
-  if(roomType === "normal"){
-    setPrice(1000)
-  }
-  if(roomType === "standard"){
-    setPrice(1500)
-  }
-  if(roomType === "deluxe"){
-    setPrice(2000)
-  }
 
-const mycookie = getCookie();
-console.log(mycookie);
-  
-
-  var headers = new Headers();
-  headers.append("Cookie",`jwt=${mycookie}`)
-  headers.append("Content-Type", "application/x-www-form-urlencoded");
-
-  const urlencoded = new URLSearchParams();
-  urlencoded.append("name", hotelName);
-  urlencoded.append("price", price);
-  urlencoded.append("category",roomType);
-  urlencoded.append("from",startDate);
-  urlencoded.append("to",endDate);
-
-  const bookingOptions = {
-    method: 'POST',
-    headers: headers,
-    body: urlencoded
-  }
-
-  console.log(urlencoded);
-  console.log(bookingOptions);
-  fetch("http://localhost:3001/hotel/booking", bookingOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-
-}
 
 
 const getCookie = ()=> {
@@ -82,49 +32,8 @@ const getCookie = ()=> {
   return token;
 }
 
-  /*
-  function parseJwt(token) {
-    if (!token) { return; }
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace('-', '+').replace('_', '/');
-    return JSON.parse(window.atob(base64));
-}
-*/
-//console.log(parseJwt('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'))
+ 
 
-
-  const handleSearch = async(e) => {
-    e.preventDefault();
-    
-   
-    const hotelid = hotelName.split(" ");
-    const id = Number(hotelid[0])
-    console.log(id);
-    const response = await fetch(`http://localhost:3001/hotel/booking`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ selectedhotel }),
-    });
-
-
-    console.log(selectedhotel);
-    // Implement your search logic here
-
-    if (checkLoggedIn) {
-      console.log("if statement");
-      return <Link href={"/Login"}> </Link>;
-    } else {
-      console.log("else is called");
-    }
-
-  
-
-const Handlebooking = ()=>{
-
-}
-  };
 
   return (
     <>
@@ -138,34 +47,15 @@ const Handlebooking = ()=>{
       >
         <select
           id="hotelname"
-          value={hotelName}
-          onChange={(e) => setHotelName(e.target.value)}
+          value={hotelId}
+          onChange={(e) => setHotelId(e.target.value)}
           className="px-4 py-2 rounded-lg bg-gray-100 w-64" required
         >
           <option value="">Select HotelName</option>
-          <option value="1 Aarhus">Aarhus</option>
-          <option value="2 Borupgaard">Borupgaard</option>
-          <option value="3 Snekkersten">Snekkersten</option>
-          <option value="4 Bygholm Park">Bygholm Park</option>
-          <option value="5 Horsens">Horsens</option>
-          <option value="6 Centralværkstedet">Centralværkstedet</option>
-          <option value="7 Copenhagen Portside">Copenhagen Portside</option>
-          <option value="8 Nordhavn">Nordhavn</option>
-          <option value="9 H.C. Andersen Odense">H.C. Andersen Odense</option>
-          <option value="10 Odense">Odense</option>
-          <option value="11 Holte">Holte</option>
-          <option value="12 CHvide Hus Aalborg">Hvide Hus Aalborg</option>
-          <option value="13 BKellers Park">Kellers Park</option>
-          <option value="14 Snekkersten">Snekkersten</option>
-          <option value="15 Børkop">Børkop</option>
-          <option value="16 Klarskovgaard">Klarskovgaard</option>
-          <option value="17 Korsør">Korsør</option>
-          <option value="18 Kolding">Kolding</option>
-          <option value="19 Kongebrogaarden">Kongebrogaarden</option>
-          <option value="20 Middelfart">Middelfart</option>
-          <option value="21 Rebild Bakker">Rebild Bakker</option>
-          <option value="22 Holte">Holte</option>
-          <option value="23 Varbergs Kusthotell">Varbergs Kusthotell</option>
+          <option value="65869d7e9e933cc0ccb4fb5c">Aarhus House</option>
+          <option value="65869d7e9e933cc0ccb4fb5d">Odense House</option>
+          <option value="65869d7e9e933cc0ccb4fb5e">Copenhagen House</option>
+          
         </select>
         <input
           type="date"
@@ -185,8 +75,8 @@ const Handlebooking = ()=>{
         />
           
 
-              <Link href={`/HotelDetail?selectedHotel=${selectedhotel}`}>
-              <button onClick={handleIt} id="submit" className="btn">
+              <Link href={`/HotelDetail?hotelId=${hotelId}&startDate=${startDate}&endDate=${endDate}`}>
+              <button  id="submit" className="btn">
             Find
           </button>
         </Link>
