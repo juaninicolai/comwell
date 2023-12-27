@@ -101,7 +101,10 @@ export class HotelsService implements OnModuleInit {
   async onModuleInit() {
     const countOfHotels = await this.hotelModel.countDocuments();
     if (countOfHotels > 0) {
-      return;
+      await this.hotelModel.deleteMany()
+      await this.roomTypeModel.deleteMany()
+      await this.roomModel.deleteMany()
+      await this.bookingModel.deleteMany()
     }
 
     const insertedHotels = await this.hotelModel.insertMany([
@@ -111,9 +114,9 @@ export class HotelsService implements OnModuleInit {
     ]);
 
     const insertedRoomTypes = await this.roomTypeModel.insertMany([
-      { name: 'standard', capacity: 2 },
-      { name: 'superior', capacity: 3 },
-      { name: 'suite', capacity: 5 },
+      { name: 'standard', price: '100', capacity: 2 },
+      { name: 'superior', price: '250', capacity: 3 },
+      { name: 'suite', price: '500', capacity: 5 },
     ]);
 
     for (const insertedHotel of insertedHotels) {

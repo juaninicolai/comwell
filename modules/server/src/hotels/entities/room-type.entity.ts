@@ -12,6 +12,10 @@ export class RoomType {
 
   @ApiProperty()
   @Prop()
+  price: number
+
+  @ApiProperty()
+  @Prop()
   capacity: number;
 }
 
