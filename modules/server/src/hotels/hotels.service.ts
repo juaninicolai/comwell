@@ -16,7 +16,7 @@ export class HotelsService implements OnModuleInit {
     @InjectModel(RoomType.name) private roomTypeModel: Model<RoomType>,
     @InjectModel(Room.name) private roomModel: Model<Room>,
     @InjectModel(Booking.name) private bookingModel: Model<Booking>,
-  ) { }
+  ) {}
 
   findAll() {
     return this.hotelModel.find();

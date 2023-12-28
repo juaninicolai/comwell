@@ -23,7 +23,7 @@ import { Booking } from './entities/booking.entity';
 
 @Controller('hotels')
 export class HotelsController {
-  constructor(private readonly hotelsService: HotelsService) { }
+  constructor(private readonly hotelsService: HotelsService) {}
 
   @ApiOkResponse({
     type: Hotel,
