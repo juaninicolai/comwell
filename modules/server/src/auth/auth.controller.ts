@@ -20,9 +20,8 @@ import { AccessTokenDto } from './dto/access-token.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
-  // TODO: Include _id in response schemas.
   @ApiOkResponse({
     type: UserEntity,
   })
@@ -56,6 +55,4 @@ export class AuthController {
   getProfile(@User() user: UserDocument) {
     return user;
   }
-
-  // TODO: Implement logout.
 }
