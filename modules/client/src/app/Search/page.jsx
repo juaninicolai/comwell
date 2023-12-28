@@ -1,18 +1,29 @@
 "use client";
 
 import checkLoggedIn from "@/components/CheckLoggedIn";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import CookieConsent from "@/components/CookieConsent";
 import { useCookies } from 'next-client-cookies';
 
 
 const SearchBar = () => {
+
   const [hotelId, setHotelId] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [isInputOk, setIsInputOk] = useState(0);
  
   const cookies = useCookies();
+
+const today = new Date();
+
+const year = today.getFullYear();
+const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+const day = today.getDate().toString().padStart(2, '0');
+
+// Format the date as "yyyy-MM-dd"
+const formattedDate = year + '-' + month + '-' + day;
 
 
   const selectedhotel = JSON.stringify({
@@ -21,8 +32,8 @@ const SearchBar = () => {
     endDate
   })
 
-  
-
+ 
+ 
 
 
 
@@ -48,11 +59,16 @@ const getCookie = ()=> {
         <select
           id="hotelname"
           value={hotelId}
-          onChange={(e) => setHotelId(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-gray-100 w-64" required
+          onChange={(e) => {
+            setHotelId(e.target.value);
+            setIsInputOk(isInputOk +1);
+            console.log(isInputOk);
+          
+          }}
+          className="px-4 py-2 rounded-lg bg-gray-100 w-64" 
         >
-          <option value="">Select HotelName</option>
-          <option value="65869d7e9e933cc0ccb4fb5c-Aarhus House ">Aarhus House</option>
+          <option value="" required>Select HotelName</option>
+          <option value="65869d7e9e933cc0ccb4fb5c-Aarhus House " >Aarhus House</option>
           <option value="65869d7e9e933cc0ccb4fb5d-Odense House">Odense House</option>
           <option value="65869d7e9e933cc0ccb4fb5e-Copenhagen House">Copenhagen House</option>
           
@@ -60,26 +76,63 @@ const getCookie = ()=> {
         <input
           type="date"
           id="startDate"
+          min={formattedDate}
           placeholder="Start Date"
           value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-gray-100 w-64" required
+          onChange={(e) => {
+            setStartDate(e.target.value);
+            setIsInputOk(isInputOk +1);
+            console.log(isInputOk);
+
+
+          
+          }}
+          className="px-4 py-2 rounded-lg bg-gray-100 w-64" require
         />
+
+
         <input
           type="date"
+          min={formattedDate}
           id="endDate"
           placeholder="End Date"
           value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
+          onChange={(e) => {
+            setEndDate(e.target.value);
+            setIsInputOk(isInputOk +1);
+            console.log(isInputOk);
+
+
+
+          
+          }}
           className="px-4 py-2 rounded-lg bg-gray-100 w-64" required
         />
-          
 
-              <Link href={`/HotelDetail?hotelId=${hotelId}&startDate=${startDate}&endDate=${endDate}`}>
+{isInputOk > 2 ? (
+            // If the user is logged in, display their email
+            <div>
+               <Link href={`/HotelDetail?hotelId=${hotelId}&startDate=${startDate}&endDate=${endDate}`}>
               <button  id="submit" className="btn">
             Find
           </button>
         </Link>
+            </div>
+           
+
+          ) : (
+            <div>
+              <marquee behavior="" direction=""><h1 className="t-white">All fields are mandatory</h1></marquee>
+            
+          
+            </div>
+            
+            
+          )
+          }
+
+
+              
             
         <div>
           
