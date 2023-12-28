@@ -1,48 +1,64 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { User } from './schemas/user.schema';
-import * as bcrypt from 'bcryptjs';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { SignUpDto } from './dto/sign-up.dto';
+import { UsersService } from 'src/users/users.service';
+import bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
-import { LoginDto, SignUpDto } from './dto/signup.dto';
+import { LogInDto } from './dto/log-in.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel(User.name)
-    private userModel: Model<User>,
+    private usersService: UsersService,
     private jwtService: JwtService,
   ) {}
 
-  async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
-    const { name, email, password } = signUpDto;
-    const hashedpassword = await bcrypt.hash(password, 10);
-    const user = await this.userModel.create({
-      name,
+  async signUp(signUpDto: SignUpDto) {
+    const {
+      firstName,
+      lastName,
+      birthDate,
       email,
-      password: hashedpassword,
+      password: plainTextPassword,
+    } = signUpDto;
+
+    const hashedPassword = await bcrypt.hash(plainTextPassword, 10);
+    return this.usersService.create({
+      firstName,
+      lastName,
+      birthDate,
+      email,
+      password: hashedPassword,
     });
-    const token = this.jwtService.sign({ id: user._id });
-    return { token };
   }
 
-  async logIn(loginDto: LoginDto): Promise<{ token: string }> {
-    const { email, password } = loginDto;
-
-    const user = await this.userModel.findOne({ email }, { password: 1 });
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
-    if (!isPasswordCorrect) {
-      throw new HttpException(
-        {
-          status: HttpStatus.FORBIDDEN,
-          error: 'incorrect password',
-        },
-        HttpStatus.FORBIDDEN,
-      );
+  async validateUser(email: string, password: string) {
+    const user = await this.usersService.findByEmail(email);
+    if (user === null) {
+      return null;
     }
 
-    const token = this.jwtService.sign({ id: user._id });
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      user.hashedPassword,
+    );
 
-    return { token };
+    if (!isPasswordCorrect) {
+      return null;
+    }
+
+    return user;
+  }
+
+  async login(loginDto: LogInDto) {
+    const { email, password } = loginDto;
+    const user = await this.validateUser(email, password);
+    if (user === null) {
+      throw new UnauthorizedException();
+    }
+
+    const payload = { sub: user._id };
+    return {
+      accessToken: this.jwtService.sign(payload),
+    };
   }
 }
