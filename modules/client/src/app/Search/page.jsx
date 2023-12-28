@@ -52,9 +52,9 @@ const getCookie = ()=> {
           className="px-4 py-2 rounded-lg bg-gray-100 w-64" required
         >
           <option value="">Select HotelName</option>
-          <option value="65869d7e9e933cc0ccb4fb5c">Aarhus House</option>
-          <option value="65869d7e9e933cc0ccb4fb5d">Odense House</option>
-          <option value="65869d7e9e933cc0ccb4fb5e">Copenhagen House</option>
+          <option value="65869d7e9e933cc0ccb4fb5c-Aarhus House ">Aarhus House</option>
+          <option value="65869d7e9e933cc0ccb4fb5d-Odense House">Odense House</option>
+          <option value="65869d7e9e933cc0ccb4fb5e-Copenhagen House">Copenhagen House</option>
           
         </select>
         <input

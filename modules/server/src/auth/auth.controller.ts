@@ -5,6 +5,7 @@ import {
   HttpException,
   HttpStatus,
   Post,
+  BadRequestException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignUpDto } from './dto/sign-up.dto';
@@ -19,11 +20,11 @@ import { AccessTokenDto } from './dto/access-token.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   // TODO: Include _id in response schemas.
   @ApiOkResponse({
-    type: UserEntity
+    type: UserEntity,
   })
   @Post('signup')
   @Public()
@@ -32,17 +33,14 @@ export class AuthController {
       return await this.authService.signUp(signUpDto);
     } catch (err) {
       if (err instanceof EmailIsTakenError) {
-        throw new HttpException(
-          `"${err.email}" is taken`,
-          HttpStatus.BAD_REQUEST,
-        );
+        throw new BadRequestException(`"${err.email}" is taken`);
       }
       throw err;
     }
   }
 
   @ApiOkResponse({
-    type: AccessTokenDto
+    type: AccessTokenDto,
   })
   @Post('login')
   @Public()
@@ -51,7 +49,7 @@ export class AuthController {
   }
 
   @ApiOkResponse({
-    type: UserEntity
+    type: UserEntity,
   })
   @ApiBearerAuth()
   @Get('profile')

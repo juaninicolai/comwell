@@ -56,10 +56,6 @@ function Navbar() {
           </li>
           <li>
             {" "}
-            <Link href={"/Hotels"}>Locations</Link>{" "}
-          </li>
-          <li>
-            {" "}
 
             {useremail ? (
             // If the user is logged in, display their email

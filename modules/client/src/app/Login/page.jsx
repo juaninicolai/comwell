@@ -37,15 +37,19 @@ function Login() {
     let body;
     try {
       body = await response.json();
+      console.log("body",body);
+
+      const { accessToken } = body;
+      console.log("token",accessToken);
+      document.cookie = "jwt=" + accessToken
+      location.href = "/";
+      localStorage.setItem("username",email);
     } catch {
       alert("Login failed");
       throw new Error("can't decode json");
     }
 
-    const { token } = body;
-    document.cookie = "jwt=" + token
-    location.href = "/";
-    localStorage.setItem("username",email);
+   
   };
 
   return (
@@ -89,7 +93,7 @@ function Login() {
 
           <button
             className=" hoverme w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-            type="submit"
+            type="submit" onClick={handleLogin}
           >
             Login
           </button>

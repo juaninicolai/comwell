@@ -4,8 +4,10 @@ import { FilterQuery, Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { RoomType } from './entities/room-type.entity';
 import { Room, RoomDocument } from './entities/room.entity';
-import { faker } from '@faker-js/faker';
 import { Booking } from './entities/booking.entity';
+import { InvalidRoomTypeError } from './errors/invalid-room-type.error';
+import { UnavailableRoomError } from './errors/unavailable-room.error';
+import { UserDocument } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class HotelsService implements OnModuleInit {
@@ -20,22 +22,80 @@ export class HotelsService implements OnModuleInit {
     return this.hotelModel.find();
   }
 
+  // TODO: Add capacity to filter. (lte)
   async findRooms(id: string, from?: Date, to?: Date) {
+    const hotelRooms = await this.roomModel.find({ hotel: id });
+
     const filter: FilterQuery<RoomDocument> = {
-      hotel: id,
+      room: { $in: hotelRooms },
     };
 
     if (from !== undefined && to !== undefined) {
-      filter.$or = [{ bookedFrom: { $gte: to } }, { bookedTo: { $lte: from } }];
+      filter.$nor = [{ from: { $gte: to } }, { to: { $lte: from } }];
     }
 
-    const availableRooms = await this.roomModel.find(filter).distinct('type');
-    return this.roomTypeModel.find({ _id: { $in: availableRooms } });
+    const bookingsForHotelRooms = await this.bookingModel
+      .find(filter)
+      .populate({
+        path: 'room',
+        populate: {
+          path: 'type',
+        },
+      });
+
+    const bookedRoomTypes = bookingsForHotelRooms.map(
+      (bookingsForHotel) => bookingsForHotel.room.type,
+    );
+
+    return this.roomTypeModel.find({ _id: { $nin: bookedRoomTypes } });
   }
 
-  async bookRoom(id: string, from: Date, to: Date) {
-    // TODO: Create booking.
-    console.log(id, from, to)
+  async bookRoom(
+    user: UserDocument,
+    id: string,
+    roomType: string,
+    from: Date,
+    to: Date,
+  ) {
+    const roomTypeDocument = await this.roomTypeModel.findOne({
+      name: roomType,
+    });
+    if (roomTypeDocument === null) {
+      throw new InvalidRoomTypeError(roomType);
+    }
+
+    const hotelRooms = await this.roomModel.find({
+      hotel: id,
+      type: roomTypeDocument._id,
+    });
+
+    const bookingsForHotelRooms = await this.bookingModel
+      .find({
+        room: { $in: hotelRooms },
+        $nor: [{ from: { $gte: to } }, { to: { $lte: from } }],
+      })
+      .populate('room');
+
+    if (bookingsForHotelRooms.length > 0) {
+      throw new UnavailableRoomError(id, roomType, from, to);
+    }
+
+    const bookedRooms = bookingsForHotelRooms.map(
+      (bookingForHotelRooms) => bookingForHotelRooms.room,
+    );
+    const roomToBook = await this.roomModel.findOne({
+      type: roomTypeDocument._id,
+      _id: { $nin: bookedRooms },
+    });
+
+    const booking = new this.bookingModel({
+      user: user._id,
+      room: roomToBook._id,
+      from,
+      to,
+    }).save();
+
+    return booking;
   }
 
   async onModuleInit() {
@@ -59,23 +119,16 @@ export class HotelsService implements OnModuleInit {
     for (const insertedHotel of insertedHotels) {
       for (const insertedRoomType of insertedRoomTypes) {
         const numberOfRooms = {
-          standard: 1,
-          superior: 1,
-          suite: 1,
+          standard: 50,
+          superior: 25,
+          suite: 10,
         }[insertedRoomType.name];
 
         const rooms = [];
         for (let i = 0; i < numberOfRooms; i++) {
-          const bookedFrom = faker.date.past();
-          const bookedTo = faker.date.between({
-            from: bookedFrom,
-            to: new Date(),
-          });
           const room = new this.roomModel({
             hotel: insertedHotel,
             type: insertedRoomType,
-            bookedFrom,
-            bookedTo,
           });
           rooms.push(room.save());
         }
