@@ -13,4 +13,4 @@ import { AuthModule } from 'src/auth/auth.module';
   controllers: [BookingController],
   providers: [BookingService],
 })
-export class BookingModule {}
+export class BookingModule { }
