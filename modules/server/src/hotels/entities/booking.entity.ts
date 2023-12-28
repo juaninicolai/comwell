@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import { Room } from './room.entity';
+import {Room, RoomSchema} from './room.entity';
 import { User } from 'src/users/entities/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -26,6 +26,7 @@ export class Booking {
 
 
 export const BookingSchema = SchemaFactory.createForClass(Booking);
+BookingSchema.index({ from: 1, to: 1 });
 
 BookingSchema.methods.toJSON = function() {
   const object = this.toObject();
