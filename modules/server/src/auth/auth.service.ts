@@ -18,7 +18,7 @@ export class AuthService {
       lastName,
       birthDate,
       email,
-      password: plainTextPassword
+      password: plainTextPassword,
     } = signUpDto;
 
     const hashedPassword = await bcrypt.hash(plainTextPassword, 10);
@@ -27,7 +27,7 @@ export class AuthService {
       lastName,
       birthDate,
       email,
-      password: hashedPassword
+      password: hashedPassword,
     });
   }
 

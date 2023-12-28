@@ -12,7 +12,7 @@ export class RoomType {
 
   @ApiProperty()
   @Prop()
-  price: number
+  price: number;
 
   @ApiProperty()
   @Prop()

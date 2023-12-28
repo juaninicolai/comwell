@@ -23,7 +23,7 @@ export class HotelsService implements OnModuleInit {
   }
 
   // TODO: Add capacity to filter. (lte)
-  async findRooms(id: string, from?: Date, to?: Date) {
+  async findRooms(id: string, capacity?: number, from?: Date, to?: Date) {
     const hotelRooms = await this.roomModel.find({ hotel: id });
 
     const filter: FilterQuery<RoomDocument> = {
@@ -47,7 +47,10 @@ export class HotelsService implements OnModuleInit {
       (bookingsForHotel) => bookingsForHotel.room.type,
     );
 
-    return this.roomTypeModel.find({ _id: { $nin: bookedRoomTypes } });
+    return this.roomTypeModel.find({
+      _id: { $nin: bookedRoomTypes },
+      ...(capacity !== undefined && { capacity: { $gte: capacity } }),
+    });
   }
 
   async bookRoom(
@@ -101,10 +104,10 @@ export class HotelsService implements OnModuleInit {
   async onModuleInit() {
     const countOfHotels = await this.hotelModel.countDocuments();
     if (countOfHotels > 0) {
-      await this.hotelModel.deleteMany()
-      await this.roomTypeModel.deleteMany()
-      await this.roomModel.deleteMany()
-      await this.bookingModel.deleteMany()
+      await this.hotelModel.deleteMany();
+      await this.roomTypeModel.deleteMany();
+      await this.roomModel.deleteMany();
+      await this.bookingModel.deleteMany();
     }
 
     const insertedHotels = await this.hotelModel.insertMany([
