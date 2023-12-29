@@ -17,7 +17,6 @@ const SearchBar = () => {
   const cookies = useCookies();
 
 const today = new Date();
-
 const year = today.getFullYear();
 const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
 const day = today.getDate().toString().padStart(2, '0');
@@ -56,6 +55,12 @@ const getCookie = ()=> {
         className=" m-20 flex flex-col justify-start space-y-4"
         action=""
       >
+        <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="Hotel"
+          >
+            <strong>Search hotels</strong>
+          </label> 
         <select
           id="hotelname"
           value={hotelId}
@@ -67,12 +72,20 @@ const getCookie = ()=> {
           }}
           className="px-4 py-2 rounded-lg bg-gray-100 w-64" 
         >
-          <option value="" required>Select HotelName</option>
+          <option value="" required>Select Hotel Name</option>
           <option value="65869d7e9e933cc0ccb4fb5c-Aarhus House " >Aarhus House</option>
           <option value="65869d7e9e933cc0ccb4fb5d-Odense House">Odense House</option>
           <option value="65869d7e9e933cc0ccb4fb5e-Copenhagen House">Copenhagen House</option>
           
         </select>
+
+
+        <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="from"
+          >
+            Start Date
+          </label>
         <input
           type="date"
           id="startDate"
@@ -90,7 +103,11 @@ const getCookie = ()=> {
           className="px-4 py-2 rounded-lg bg-gray-100 w-64" require
         />
 
-
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="to">
+            End Date
+          </label>
         <input
           type="date"
           min={formattedDate}

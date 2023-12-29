@@ -23,7 +23,7 @@ import { Booking } from './entities/booking.entity';
 
 @Controller('hotels')
 export class HotelsController {
-  constructor(private readonly hotelsService: HotelsService) { }
+  constructor(private readonly hotelsService: HotelsService) {}
 
   @ApiOkResponse({
     type: Hotel,
@@ -45,7 +45,12 @@ export class HotelsController {
     @Param() params: FindRoomsParamsDto,
     @Query() query: FindRoomsQueryDto,
   ) {
-    return this.hotelsService.findRooms(params.id, query.from, query.to);
+    return this.hotelsService.findRooms(
+      params.id,
+      query.capacity,
+      query.from,
+      query.to,
+    );
   }
 
   @ApiOkResponse({

@@ -11,8 +11,11 @@ export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async create(createUserDto: CreateUserDto) {
-    const { email, password } = createUserDto;
+    const { firstName, lastName, birthDate, email, password } = createUserDto;
     const userToCreate = new this.userModel({
+      firstName,
+      lastName,
+      birthDate,
       email,
       hashedPassword: password,
     });

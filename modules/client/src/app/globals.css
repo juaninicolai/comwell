@@ -38,7 +38,7 @@ main,
   background-size: cover;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 850px) {
   main,
 .login,
 .signup,
@@ -97,3 +97,33 @@ main,
 
 }
 
+.signupbtn{
+  color: black;
+  background-color:lightblue;
+}
+.signupbtn:hover{
+  z-index:10;
+  background-color:green;
+}
+
+.navtext{
+  color: lightblue;
+}
+
+.navtext ul li :hover{
+  color:blue;
+}
+
+@media screen and (max-width: 700px) {
+  .navtext{
+    color: black;
+  }
+
+  .navtext ul li :hover{
+    color:blue;
+  }
+}
+.white{
+  color: black;
+  background-color:lightblue;
+}

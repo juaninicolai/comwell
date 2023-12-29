@@ -7,6 +7,18 @@ export type UserDocument = HydratedDocument<User>;
 @Schema()
 export class User {
   @ApiProperty()
+  @Prop({ required: true })
+  firstName: string;
+
+  @ApiProperty()
+  @Prop({ required: true })
+  lastName: string;
+
+  @ApiProperty()
+  @Prop({ required: true })
+  birthDate: Date;
+
+  @ApiProperty()
   @Prop({ unique: true, required: true })
   email: string;
 

@@ -13,9 +13,22 @@ export class AuthService {
   ) {}
 
   async signUp(signUpDto: SignUpDto) {
-    const { email, password: plainTextPassword } = signUpDto;
+    const {
+      firstName,
+      lastName,
+      birthDate,
+      email,
+      password: plainTextPassword,
+    } = signUpDto;
+
     const hashedPassword = await bcrypt.hash(plainTextPassword, 10);
-    return this.usersService.create({ email, password: hashedPassword });
+    return this.usersService.create({
+      firstName,
+      lastName,
+      birthDate,
+      email,
+      password: hashedPassword,
+    });
   }
 
   async validateUser(email: string, password: string) {

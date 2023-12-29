@@ -4,21 +4,35 @@ import React from "react";
 import { useState } from "react";
 
 function Signup() {
-  const [fullName, setFullName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [birthdate, setBirthdate] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
+
+
+
+
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+  const day = today.getDate().toString().padStart(2, '0');
+  const formattedDate = year + '-' + month + '-' + day;
 
   const handleSignup = async (e) => {
     e.preventDefault();
     if (password === repassword) {
       
       const signupdata = {
-        name: fullName,
+        firstName: firstName,
+        lastName: lastName,
+        birthDate: birthdate,
         email: email,
         password: password,
       };
 
+      console.log(signupdata);
       const response = await fetch("http://localhost:3001/auth/signup", {
         method: "POST",
         headers: {
@@ -50,31 +64,56 @@ function Signup() {
 
   return (
     <div className=" signup flex h-screen">
-      <form onSubmit={handleSignup} className="max-w-md ml-20  w-full">
-        <h1 className="text-3xl font-bold mb-8 text-center ">Signup Page</h1>
+      <form onSubmit={handleSignup} className=" max-w-md m-20 w-full">
         <div className="mb-1">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="fullName"
-          >
-            Full Name
-          </label>
+        <h1 className=" font-bold mb-2 text-center ">Signup Page</h1>
           <input
+            placeholder="Enter your firstName"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="fullName"
             type="text"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
+
+        <div className="mb-1">
+         
+          <input
+            placeholder="Enter your lastname"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="lastName"
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
+
         <div className="mb-1">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="email"
+            className="white block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="birthdate"
           >
-            Email
+            Birthdate
           </label>
           <input
+            data-placeholder="enter your birthdate"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="birthdate"
+            type="date"
+            max={formattedDate}
+            value={birthdate}
+            onChange={(e) => setBirthdate(e.target.value)}
+          />
+        </div>
+
+
+
+
+        <div className="mb-1">
+          
+          <input
+            placeholder="Enter your email"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
@@ -83,13 +122,9 @@ function Signup() {
           />
         </div>
         <div className="mb-1">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            Password
-          </label>
+         
           <input
+            placeholder="Enter Password"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
@@ -98,13 +133,9 @@ function Signup() {
           />
         </div>
         <div className="mb-2">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            Repeat Password
-          </label>
+         
           <input
+            placeholder="Repeate password"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="repassword"
             type="password"
@@ -112,12 +143,15 @@ function Signup() {
             onChange={(e) => setRepassword(e.target.value)}
           />
         </div>
+
+        <div className="mt-4">
         <button
           type="submit"
-          className=" hover:bg-blue-700 text-white-600 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+          className=" signupbtn mt-4 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
         >
           Signup
         </button>
+        </div>
       </form>
     </div>
   );

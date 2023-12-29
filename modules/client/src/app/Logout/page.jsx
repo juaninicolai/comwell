@@ -15,6 +15,7 @@ function Logout() {
         //location.reload();
         cookie.remove("jwt");
         localStorage.clear();
+        cookie.remove("localConsent");
 
     },[])
 

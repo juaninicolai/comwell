@@ -9,25 +9,25 @@ export type BookingDocument = HydratedDocument<Booking>;
 @Schema()
 export class Booking {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: User.name })
-  user: User
+  user: User;
 
   @ApiProperty({ type: 'string' })
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Room.name })
-  room: Room
+  room: Room;
 
   @ApiProperty()
   @Prop()
-  from: Date
+  from: Date;
 
   @ApiProperty()
   @Prop()
-  to: Date
+  to: Date;
 }
 
-
 export const BookingSchema = SchemaFactory.createForClass(Booking);
+BookingSchema.index({ from: 1, to: 1 });
 
-BookingSchema.methods.toJSON = function() {
+BookingSchema.methods.toJSON = function () {
   const object = this.toObject();
   delete object.user;
   return object;
