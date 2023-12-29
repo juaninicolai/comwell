@@ -12,6 +12,7 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     if (password === repassword) {
+      
       const signupdata = {
         name: fullName,
         email: email,

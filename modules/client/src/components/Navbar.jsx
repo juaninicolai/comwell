@@ -18,30 +18,14 @@ function Navbar() {
 
   },[])
 
-  /*
-  import { useCookies } from 'next-client-cookies';
 
-
-  function parseJwt(token) {
-    if (!token) { return; }
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace('-', '+').replace('_', '/');
-    return JSON.parse(window.atob(base64));
-}
-  const userDetails =parseJwt(token);
-  console.log(userDetails);
-  //"657dcfad74850362c8408ae7"
-
-*/
 
   return (
     <header className="fixed top-0 w-full">
       <nav className="  navbar h-30 py-2 font-semibold px-3 flex justify-between  ">
         
         
-        
-        
-        
+  
         <div className="logo">
           {" "}
           <Link href={"/"}>
