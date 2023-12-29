@@ -41,18 +41,16 @@ function Login() {
 
       const { accessToken } = body;
       console.log("token", accessToken);
-      document.cookie = "jwt=" + accessToken
+      document.cookie = "jwt=" + accessToken;
       location.href = "/";
       localStorage.setItem("username", email);
     } catch {
       alert("Login failed");
       throw new Error("can't decode json");
     }
-
   };
 
   return (
-
     <>
       <CookieConsent />
       <div className=" login flex flex-col items-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -62,9 +60,7 @@ function Login() {
           </h1>
           <form onSubmit={handleLogin}>
             <div>
-              <label
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Your email
               </label>
               <input
@@ -92,7 +88,8 @@ function Login() {
 
             <button
               className=" hoverme w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              type="submit" onClick={handleLogin}
+              type="submit"
+              onClick={handleLogin}
             >
               Login
             </button>
@@ -109,7 +106,6 @@ function Login() {
         </div>
       </div>
     </>
-
   );
 }
 

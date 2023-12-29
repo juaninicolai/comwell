@@ -40,28 +40,22 @@ main,
 
 @media screen and (max-width: 850px) {
   main,
-.login,
-.signup,
-.bgphoto {
-  background: none;
-
+  .login,
+  .signup,
+  .bgphoto {
+    background: none;
   }
 }
 
-
-.hoverme:hover{
+.hoverme:hover {
   background-color: blue;
   z-index: 100;
   color: white;
   margin-top: 5px;
-
-
 }
-
 
 .search {
   height: 100vh;
-  
 }
 
 .btn {
@@ -71,59 +65,58 @@ main,
   height: 35px;
   width: 50px;
 }
-.bookbtn{
+.bookbtn {
   margin-bottom: 0;
 }
 
-.hotel{
+.hotel {
   background-color: white;
 }
-.borderbox{
+.borderbox {
   border: 1px dashed green;
-  padding:5px;
+  padding: 5px;
 }
-.consent{
+.consent {
   background-color: yellowgreen;
   opacity: 0.8;
 }
-.consentbtn{
+.consentbtn {
   background-color: green;
-  color: white
+  color: white;
 }
-.bgimage{
+.bgimage {
   background-color: white;
   border: 1px solid red;
-  border-radius:10px;
-
+  border-radius: 10px;
 }
 
-.signupbtn{
+.signupbtn {
   color: black;
-  background-color:lightblue;
+  background-color: lightblue;
 }
-.signupbtn:hover{
-  z-index:10;
-  background-color:green;
+.signupbtn:hover {
+  z-index: 10;
+  background-color: green;
 }
 
-.navtext{
+.navtext {
   color: lightblue;
 }
 
-.navtext ul li :hover{
-  color:blue;
+.navtext ul li :hover {
+  color: blue;
 }
 
 @media screen and (max-width: 700px) {
-  .navtext{
+  .navtext {
     color: black;
   }
 
-  .navtext ul li :hover{
-    color:blue;
+  .navtext ul li :hover {
+    color: blue;
   }
 }
-.white{
+.white {
   color: black;
-  background-color:lightblue;
+  background-color: lightblue;
 }

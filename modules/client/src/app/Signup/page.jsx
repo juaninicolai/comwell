@@ -11,19 +11,15 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
 
-
-
-
   const today = new Date();
   const year = today.getFullYear();
-  const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
-  const day = today.getDate().toString().padStart(2, '0');
-  const formattedDate = year + '-' + month + '-' + day;
+  const month = (today.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+  const day = today.getDate().toString().padStart(2, "0");
+  const formattedDate = year + "-" + month + "-" + day;
 
   const handleSignup = async (e) => {
     e.preventDefault();
     if (password === repassword) {
-      
       const signupdata = {
         firstName: firstName,
         lastName: lastName,
@@ -66,7 +62,7 @@ function Signup() {
     <div className=" signup flex h-screen">
       <form onSubmit={handleSignup} className=" max-w-md m-20 w-full">
         <div className="mb-1">
-        <h1 className=" font-bold mb-2 text-center ">Signup Page</h1>
+          <h1 className=" font-bold mb-2 text-center ">Signup Page</h1>
           <input
             placeholder="Enter your firstName"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -78,7 +74,6 @@ function Signup() {
         </div>
 
         <div className="mb-1">
-         
           <input
             placeholder="Enter your lastname"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -103,11 +98,7 @@ function Signup() {
           />
         </div>
 
-
-
-
         <div className="mb-1">
-          
           <input
             placeholder="Enter your email"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -118,7 +109,6 @@ function Signup() {
           />
         </div>
         <div className="mb-1">
-         
           <input
             placeholder="Enter Password"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -129,7 +119,6 @@ function Signup() {
           />
         </div>
         <div className="mb-2">
-         
           <input
             placeholder="Repeate password"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -141,12 +130,12 @@ function Signup() {
         </div>
 
         <div className="mt-4">
-        <button
-          type="submit"
-          className=" signupbtn mt-4 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-        >
-          Signup
-        </button>
+          <button
+            type="submit"
+            className=" signupbtn mt-4 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+          >
+            Signup
+          </button>
         </div>
       </form>
     </div>
