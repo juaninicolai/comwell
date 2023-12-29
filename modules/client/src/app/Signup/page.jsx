@@ -90,17 +90,13 @@ function Signup() {
         </div>
 
         <div className="mb-1">
-          <label
-            className="white block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="birthdate"
-          >
-            Birthdate
-          </label>
           <input
-            data-placeholder="enter your birthdate"
+            placeholder="enter your birthdate"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="birthdate"
-            type="date"
+            type="text"
+            onFocus={(e) => (e.target.type = "date")}
+            onBlur={(e) => (e.target.type = "text")}
             max={formattedDate}
             value={birthdate}
             onChange={(e) => setBirthdate(e.target.value)}

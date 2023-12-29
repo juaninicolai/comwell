@@ -86,6 +86,10 @@ const getCookie = ()=> {
           >
             Start Date
           </label>
+
+     
+
+
         <input
           type="date"
           id="startDate"
@@ -100,6 +104,8 @@ const getCookie = ()=> {
 
           
           }}
+
+
           className="px-4 py-2 rounded-lg bg-gray-100 w-64" require
         />
 

@@ -20,6 +20,7 @@ function Pay() {
     const cookies = useCookies();
     const token = cookies.get("jwt");
     let payLoad = undefined;
+    const days = (new Date(endDate) - new Date(startDate))/1000/60/60/24
 
     useEffect(()=> {
 
@@ -84,10 +85,10 @@ function Pay() {
     <h1>From: <strong>{startDate}</strong></h1>
     <h1>To: <strong>{endDate}</strong></h1>
     <h1>No of guest: <strong>{capacity}</strong></h1>
-    <h1>Your payment amount is: <strong>{2000}DKK</strong></h1>
+    <h1>Your payment amount is: <strong>{amount*days}DKK</strong></h1>
   
             
-            <Link href={`/Final?booking=${booking?booking._id:""}`}>
+            <Link href={`/Final?price=${amount*days}`}>
             <button className="w-20 h-50 rounded signupbtn" onClick={() => {
     const confirmBox = window.confirm(
       "Are you sure to proceed this booking?"

@@ -16,15 +16,17 @@ const day = today.getDate().toString().padStart(2, '0');
 // Format the date as "yyyy-MM-dd"
 const formattedDate = year + '-' + month + '-' + day;
 
-
+const amount = searchParams.get("price");
   return (
     <div className="login flex flex-col items-start  px-6 py-8 mx-auto md:h-screen lg:py-0">
       <div className="mt-20 ml-2 flex  flex-col mt-20">
         <h1>Your booking confirmation details:</h1>
+        <hr />
         <h1>Room Id: <strong>{booking.room}</strong></h1>
         <h1>From: <strong>{booking.from}</strong></h1>
         <h1>To: <strong>{booking.to}</strong></h1>
-        <h1>Booing Id: <strong>{booking._id}</strong></h1>
+        <h1>Booking Id: <strong>{booking._id}</strong></h1>
+        <h1>Paid Amount: <strong>{amount} DKK</strong></h1>
         <h1>Booking Date: <strong>{formattedDate}</strong></h1>
 
 
