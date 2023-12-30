@@ -80,20 +80,24 @@ const SearchBar = () => {
               Start Date
             </label>
 
-            <input
-              type="date"
-              id="startDate"
-              min={formattedDate}
-              placeholder="Start Date"
-              value={startDate}
-              onChange={(e) => {
-                setStartDate(e.target.value);
-                setIsInputOk(isInputOk + 1);
-                console.log(isInputOk);
-              }}
-              className="px-4 py-2 rounded-lg bg-gray-100 w-64"
-              require
-            />
+        <input
+          type="date"
+          id="startDate"
+          min={formattedDate}
+          placeholder="Start Date"
+          value={startDate}
+          onChange={(e) => {
+            setStartDate(e.target.value);
+            setIsInputOk(isInputOk +1);
+            console.log(isInputOk);
+
+
+          
+          }}
+
+
+          className="px-4 py-2 rounded-lg bg-gray-100 w-64" require
+        />
 
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
