@@ -14,12 +14,16 @@ function Pay() {
     const capacity = searchParams.get('capacity');
     const startDate = searchParams.get('startDate');
     const endDate = searchParams.get('endDate');
+    
     const hotelId = searchParams.get('hotelId');
     const idArray = hotelId.split("-");
     const hotelName = idArray[1];
     const cookies = useCookies();
     const token = cookies.get("jwt");
     let payLoad = undefined;
+    if(startDate === endDate){
+      location.href="/Search"
+    }
     const days = ((new Date(endDate) - new Date(startDate))/1000/60/60/24);
 
     useEffect(()=> {

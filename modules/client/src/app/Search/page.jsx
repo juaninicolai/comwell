@@ -7,12 +7,14 @@ import CookieConsent from "@/components/CookieConsent";
 import { useCookies } from "next-client-cookies";
 
 const SearchBar = () => {
+  const cookies = useCookies();
+
   const [hotelId, setHotelId] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [isInputOk, setIsInputOk] = useState(0);
 
-  const cookies = useCookies();
+ 
 
   const today = new Date();
   const year = today.getFullYear();
@@ -21,6 +23,7 @@ const SearchBar = () => {
 
   // Format the date as "yyyy-MM-dd"
   const formattedDate = year + "-" + month + "-" + day;
+  const formattedDate1 = year + "-" + month + "-" + (Number(day)+1);
 
   const selectedhotel = JSON.stringify({
     hotelId,
@@ -107,9 +110,9 @@ const SearchBar = () => {
             </label>
             <input
               type="date"
-              min={formattedDate}
+              min={formattedDate1}
               id="endDate"
-              placeholder="End Date"
+              placeholder="End Date "
               value={endDate}
               onChange={(e) => {
                 setEndDate(e.target.value);

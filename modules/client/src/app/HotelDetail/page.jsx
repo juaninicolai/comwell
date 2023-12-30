@@ -16,6 +16,13 @@ function HotelDetail() {
   const startDate = searchParams.get("startDate");
   const endDate = searchParams.get("endDate");
 
+  if(startDate === endDate){
+    alert("enddate should be greater than startdate please go to the search page again and select the right date");
+    location.href= "/Search";
+  return;
+
+  }
+
   useEffect(() => {
     const requestOptions = {
       method: "GET",

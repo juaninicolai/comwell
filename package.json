@@ -11,9 +11,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "workspaces": [
-    "./modules/*"
-  ],
+  
   "devDependencies": {
     "@types/cookie-parser": "^1.4.6"
   }
