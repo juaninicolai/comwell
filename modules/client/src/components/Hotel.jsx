@@ -30,7 +30,7 @@ const Hotel = ({ hotelData }) => {
         />
         <h2>{hotelData.name}</h2>
         <p>Capacity: {hotelData.capacity}</p>
-        <p>Price: {hotelData.price}</p>
+        <p>Price: {hotelData.price} DKK</p>
         <div>
           {useremail ? (
             <div>
