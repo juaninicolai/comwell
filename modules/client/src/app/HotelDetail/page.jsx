@@ -15,6 +15,7 @@ function HotelDetail() {
 
   const startDate = searchParams.get("startDate");
   const endDate = searchParams.get("endDate");
+  const capacity = searchParams.get("capacity");
 
   useEffect(() => {
     const requestOptions = {
@@ -22,7 +23,7 @@ function HotelDetail() {
     };
 
     fetch(
-      `http://localhost:3001/hotels/${hotelId}/rooms?from=${startDate}&to=${endDate}`,
+      `http://localhost:3001/hotels/${hotelId}/rooms?from=${startDate}&to=${endDate}&capacity=${capacity}`,
       requestOptions,
     )
       .then((response) => response.json())

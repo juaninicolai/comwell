@@ -1,6 +1,5 @@
 "use client";
 
-import checkLoggedIn from "@/components/CheckLoggedIn";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import CookieConsent from "@/components/CookieConsent";
@@ -8,9 +7,24 @@ import { useCookies } from "next-client-cookies";
 
 const SearchBar = () => {
   const [hotelId, setHotelId] = useState("");
+  const [capacity, setCapacity] = useState(1);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [isInputOk, setIsInputOk] = useState(0);
+  const [hotels, setHotels] = useState([])
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch("http://localhost:3001/hotels")
+      if (!response.ok) {
+        alert("Unable to fetch the hotels")
+        return
+      }
+
+      const data = await response.json()
+      setHotels(data)
+    })()
+  }, [])
 
   const cookies = useCookies();
 
@@ -62,16 +76,33 @@ const SearchBar = () => {
               <option value="" required>
                 Select Hotel Name
               </option>
-              <option value="65869d7e9e933cc0ccb4fb5c-Aarhus House ">
-                Aarhus House
-              </option>
-              <option value="65869d7e9e933cc0ccb4fb5d-Odense House">
-                Odense House
-              </option>
-              <option value="65869d7e9e933cc0ccb4fb5e-Copenhagen House">
-                Copenhagen House
-              </option>
+              {hotels.map((hotel) => (
+                <option key={hotel._id} value={`${hotel._id}-${hotel.name} `} >
+                  {hotel.name}
+                </option>
+              ))}
             </select>
+
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="capacity"
+            >
+              Capacity
+            </label>
+
+            <input
+              type="number"
+              id="capacity"
+              min={1}
+              placeholder="Capacity"
+              value={capacity}
+              onChange={(e) => {
+                setCapacity(e.target.value);
+                setIsInputOk(isInputOk + 1);
+              }}
+              className="px-4 py-2 rounded-lg bg-gray-100 w-64"
+              require
+            />
 
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -120,7 +151,7 @@ const SearchBar = () => {
               // If the user is logged in, display their email
               <div>
                 <Link
-                  href={`/HotelDetail?hotelId=${hotelId}&startDate=${startDate}&endDate=${endDate}`}
+                  href={`/HotelDetail?hotelId=${hotelId}&startDate=${startDate}&endDate=${endDate}&capacity=${capacity}`}
                 >
                   <button id="submit" className="btn">
                     Find
@@ -138,7 +169,7 @@ const SearchBar = () => {
             <div></div>
           </form>
         </div>
-      </div>
+      </div >
     </>
   );
 };
