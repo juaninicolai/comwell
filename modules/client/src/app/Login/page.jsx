@@ -7,7 +7,9 @@ import CookieConsent from "@/components/CookieConsent";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const bookingInProgress = (new URLSearchParams(location.search)).get("booking_in_progress")
+  const bookingInProgress = new URLSearchParams(location.search).get(
+    "booking_in_progress",
+  );
   const validateEmail = (email) => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(String(email).toLowerCase());
@@ -42,7 +44,7 @@ function Login() {
       const { accessToken } = body;
       console.log("token", accessToken);
       document.cookie = "jwt=" + accessToken;
-      console.log(bookingInProgress)
+      console.log(bookingInProgress);
       if (bookingInProgress !== null) {
         location.href = bookingInProgress;
       } else {

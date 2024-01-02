@@ -11,20 +11,20 @@ const SearchBar = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [isInputOk, setIsInputOk] = useState(0);
-  const [hotels, setHotels] = useState([])
+  const [hotels, setHotels] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const response = await fetch("http://localhost:3001/hotels")
+      const response = await fetch("http://localhost:3001/hotels");
       if (!response.ok) {
-        alert("Unable to fetch the hotels")
-        return
+        alert("Unable to fetch the hotels");
+        return;
       }
 
-      const data = await response.json()
-      setHotels(data)
-    })()
-  }, [])
+      const data = await response.json();
+      setHotels(data);
+    })();
+  }, []);
 
   const cookies = useCookies();
 
@@ -77,7 +77,7 @@ const SearchBar = () => {
                 Select Hotel Name
               </option>
               {hotels.map((hotel) => (
-                <option key={hotel._id} value={`${hotel._id}-${hotel.name} `} >
+                <option key={hotel._id} value={`${hotel._id}-${hotel.name} `}>
                   {hotel.name}
                 </option>
               ))}
@@ -169,7 +169,7 @@ const SearchBar = () => {
             <div></div>
           </form>
         </div>
-      </div >
+      </div>
     </>
   );
 };

@@ -3,11 +3,13 @@
 ## How to run
 
 Start the NextJS app:
+
 ```sh
 npm run -w client dev
 ```
 
 Start the NestJS app:
+
 ```sh
 npm run -w server start:dev
 ```
