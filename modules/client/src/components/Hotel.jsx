@@ -16,7 +16,7 @@ const Hotel = ({ hotelData }) => {
     }
   }, []);
   const srcdata = `/${hotelData.name}.jpeg`;
-  const handleBooking = (hotelData) => {};
+  const handleBooking = (hotelData) => { };
   return (
     <div className="flex  flex-grow max-w-full h-full">
       <div className=" flex hotel flex-col  p-2">
@@ -36,13 +36,11 @@ const Hotel = ({ hotelData }) => {
             <div>
               <span>
                 <Link
-                  href={`/Pay?id=${hotelData._id}&hotelname=${
-                    hotelData.name
-                  }&capacity=${hotelData.capacity}&price=${
-                    hotelData.price
-                  }&startDate=${params.get("startDate")}&endDate=${params.get(
-                    "endDate",
-                  )}&hotelId=${params.get("hotelId")}`}
+                  href={`/Pay?id=${hotelData._id}&hotelname=${hotelData.name
+                    }&capacity=${hotelData.capacity}&price=${hotelData.price
+                    }&startDate=${params.get("startDate")}&endDate=${params.get(
+                      "endDate",
+                    )}&hotelId=${params.get("hotelId")}`}
                 >
                   <button className="btn"> Book </button>
                 </Link>
@@ -50,14 +48,14 @@ const Hotel = ({ hotelData }) => {
             </div>
           ) : (
             <div>
-              <Link href={"/Login"}>
+              <Link href={`/Login?booking_in_progress=${encodeURIComponent(`Pay?id=${hotelData._id}&hotelname=${hotelData.name}&capacity=${hotelData.capacity}&price=${hotelData.price}&startDate=${params.get("startDate")}&endDate=${params.get("endDate",)}&hotelId=${params.get("hotelId")}`)}`}>
                 <button className="btn"> Book </button>
               </Link>
             </div>
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
